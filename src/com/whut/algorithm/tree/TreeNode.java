@@ -12,5 +12,10 @@ public class TreeNode {
 
     public TreeNode left,right;
 
+    public TreeNode() {
+    }
 
+    public TreeNode(String val) {
+        this.val = val;
+    }
 }
