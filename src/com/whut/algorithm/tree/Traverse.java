@@ -216,6 +216,49 @@ public class Traverse {
         }
     }
 
+    /**
+     * 层序遍历统计树的高度
+     *
+     * @param root
+     * @return
+     */
+    private static int treeDepth(TreeNode root) {
+
+        if (root == null)
+            return 0;
+
+        Queue<TreeNode> queue = new LinkedList<>();
+
+        int depth = 0;
+
+        //根节点入队列
+        queue.offer(root);
+
+        while (!queue.isEmpty()) {
+
+            //sz用于统计该层的结点个数，用于来确保该层全部被访问到
+            int sz = queue.size();
+
+            for (int i = 0; i < sz; i++) {
+                //结点出队列
+                TreeNode treeNode = queue.poll();
+
+                //将左子树入队列
+                if(treeNode.left != null)
+                    queue.offer(treeNode.left);
+
+                if(treeNode.right != null)
+                    queue.offer(treeNode.right);
+
+            }
+            depth++;
+
+        }
+
+
+        return depth;
+    }
+
     public static void main(String[] args) {
 
         TreeNode treeNode1 = new TreeNode("1");
@@ -231,6 +274,8 @@ public class Traverse {
         treeNode2.right = treeNode4;
 
         nonRecursionPostOrderTraverse2(treeNode1);
+
+        System.out.println("depth = "+treeDepth(treeNode1));
 
     }
 
