@@ -1,5 +1,7 @@
 package com.whut.algorithm.palindrom_string;
 
+import java.util.LinkedList;
+
 /**
  * @author Administrator
  * @version 1.0.0
@@ -28,6 +30,101 @@ public class Palindrom {
         return left >= right;
     }
 
+    /**
+     * 递归逆序
+     * <p>
+     * 图解见书p284
+     *
+     * @param head
+     * @return
+     */
+    private static ListNode recursionReverse(ListNode head) {
+        if (head == null || head.next == null)
+            return head;
+        //last为反转后的序列的头结点
+        ListNode last = reverse(head.next);
+        head.next.next = head;
+        head.next = null;
+        return last;
+    }
+
+    /**
+     * 递归反转前n个结点，n从1开始
+     *
+     * @param head
+     * @return
+     */
+    //后驱结点
+    static ListNode successorNode = null;
+
+    private static ListNode recursionReverseN(ListNode head, int n) {
+        if (n == 1) {
+            //找到后驱
+            successorNode = head.next;
+            return head;
+        }
+
+        ListNode last = recursionReverseN(head.next, n - 1);
+        head.next.next = head;
+
+        //头结点指向后驱结点
+        head.next = successorNode;
+
+        return last;
+
+    }
+
+    /**
+     * 反转m到n结点的链表
+     *
+     * @param head
+     * @param m
+     * @param n
+     * @return
+     */
+    private static ListNode recursionReverseMN(ListNode head, int m, int n) {
+        if (m == 1) {
+            return recursionReverseN(head, n);
+        }
+        //head.next 反转区间为[m-1,n-1]
+        head.next = recursionReverseMN(head.next, m - 1, n - 1);
+        return head;
+    }
+
+    /**
+     * 不带头结点
+     *
+     * @param head
+     * @return
+     */
+    private static ListNode reverse2(ListNode head) {
+        //pre指前驱结点，cur当前结点也就是工作结点,nxt防止断链
+        ListNode pre, cur, nxt;
+
+        pre = null;
+        cur = head;
+        nxt = head;
+        while (cur != null) {
+            //防止断链
+            nxt = cur.next;
+
+            //逆序该结点
+            cur.next = pre;
+
+            //更新结点
+            pre = cur;
+            cur = nxt;
+        }
+        //返回反转后的头结点
+        return pre;
+    }
+
+    /**
+     * 带头结点的反转
+     *
+     * @param head
+     * @return
+     */
     private static ListNode reverse(ListNode head) {
 
         if (head.next == null)

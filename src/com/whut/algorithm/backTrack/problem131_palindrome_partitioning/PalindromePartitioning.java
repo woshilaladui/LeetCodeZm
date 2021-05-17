@@ -33,7 +33,7 @@ public class PalindromePartitioning {
         //backTrack(s, result, temp, 0);
         backTrack(s, result, temp, 0, s.length());
 
-//        for (List<String> list : result) {
+//        for (LinkedList<String> list : result) {
 //            for (String s1 : list) {
 //                System.out.print(s1 + " ");
 //            }

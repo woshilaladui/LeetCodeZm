@@ -14,6 +14,7 @@ public class FourBoard {
         //dp[i]代表
         int[] dp = new int[N + 1];
 
+        //
         dp[0] = 0;
         for (int i = 1; i <= N; i++) {
             //选择只输入A

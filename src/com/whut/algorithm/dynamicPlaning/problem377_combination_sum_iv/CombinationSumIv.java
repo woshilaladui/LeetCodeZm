@@ -34,11 +34,15 @@ public class CombinationSumIv {
 
         // 1.初始化dp数组 dynamic programming
         int[] dp = new int[target + 1];
-        // 代表一个空集 空集和它"前面"的元素凑成一种解法，所以是 1
+        // 恰在Nums数组中存在一个数target相等 为1种可能
+        //eg i = 1时候 dp[1] =dp[1] + dp[1-nums[j]] = dp[1] + dp[0]  此时dp[1] = 0 dp[0] = 1
         dp[0] = 1;
         // 动态规划
         // 2.遍历目标正整数 i的意思是当前的目标正整数
-        //不能理解为背包问题
+
+        /**
+         * 为什么target在外层循环，因为组合问题，且考虑元素顺序，112 和211是不同的，所以target放在外层
+         */
         for (int i = 1; i <= target; i++) {
             for (int num : nums) {
                 if (i >= num)
@@ -46,6 +50,11 @@ public class CombinationSumIv {
                     dp[i] += dp[i - num];
             }
         }
+
+        //
+        for(int i=0;i<=target;i++)
+            System.out.print(dp[i]+" ");
+        System.out.println();
 
         return dp[target];
 
@@ -142,8 +151,9 @@ public class CombinationSumIv {
     public static void main(String[] args) {
 
         int[] nums = new int[]{ 1, 2, 3};
-        int target = 4;
-        System.out.println(combinationSum4_3(nums, target));
+        int target = 3;
+        System.out.println();
+        System.out.println(combinationSum4_3(nums, 0));
 
     }
 }

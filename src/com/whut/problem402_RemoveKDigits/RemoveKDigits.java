@@ -46,7 +46,7 @@ public class RemoveKDigits {
 
 
         for (int i = 0; i < stack.size(); i++) {
-            //System.out.println("num = " + stack.get(i));
+            //System.out.println("num = " + monotonic_stack.get(i));
             result.append(stack.get(i));
         }
 
