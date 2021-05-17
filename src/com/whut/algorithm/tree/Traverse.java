@@ -142,14 +142,15 @@ public class Traverse {
             while (!stack.empty()) {
                 //DLR
                 //访问根节点
-                TreeNode tempNode = stack.pop();
-                System.out.println(tempNode.val);
+                tree = stack.pop();
+                if(tree != null)
+                    System.out.println(tree.val);
 
                 //先将右子树入栈，再将左子树入栈
-                if (tempNode.right != null)
-                    stack.push(tempNode.right);
-                if (tempNode.left != null)
-                    stack.push(tempNode.left);
+                if (tree != null && tree.right != null)
+                    stack.push(tree.right);
+                if (tree != null && tree.left != null)
+                    stack.push(tree.left);
 
             }
 
@@ -271,11 +272,11 @@ public class Traverse {
 
         treeNode1.left = treeNode2;
         treeNode1.right = treeNode3;
-        treeNode2.right = treeNode4;
+       // treeNode2.right = treeNode4;
 
-        nonRecursionPostOrderTraverse2(treeNode1);
+        nonRecursionPreOrderTraverse(treeNode1);
 
-        System.out.println("depth = "+treeDepth(treeNode1));
+  //      System.out.println("depth = "+treeDepth(treeNode1));
 
     }
 

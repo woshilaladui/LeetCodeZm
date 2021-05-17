@@ -31,8 +31,11 @@ public class PermutationInString {
                 need.put(c, need.get(c) + 1);
             else
                 need.put(c, 1);
-            window.put(c, 0);
         }
+
+        for(char c : c_s2)
+            window.put(c,0);
+
 
         //扩大窗口
         while (right < s2.length()) {
@@ -41,11 +44,11 @@ public class PermutationInString {
             char c = c_s2[right];
             //扩大窗口
             right++;
-
+            window.put(c, window.get(c) + 1);
             //对窗口数据进行更新
             if (need.containsKey(c)) {
                 //将window中对应字符的个数++
-                window.put(c, window.get(c) + 1);
+
                 if (window.get(c).equals(need.get(c)))
                     valid++;
             }
@@ -64,8 +67,9 @@ public class PermutationInString {
                 if (need.containsKey(d)) {
                     if (window.get(d).equals(need.get(d)))
                         valid--;
-                    window.put(d, window.get(d) - 1);
+
                 }
+                window.put(d, window.get(d) - 1);
             }//end while
 
         }
@@ -76,7 +80,7 @@ public class PermutationInString {
     public static void main(String[] args) {
 
         String s1 = "ab";
-        String s2 = "eidboaoo";
+        String s2 = "eidbaaoo";
 
         System.out.println(checkInclusion(s1,s2));
 

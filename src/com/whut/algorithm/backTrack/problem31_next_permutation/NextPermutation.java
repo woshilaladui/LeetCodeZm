@@ -140,7 +140,7 @@ public class NextPermutation {
     }
 
     public static void main(String[] args) {
-        int[] nums = new int[]{1, 3, 2};
+        int[] nums = new int[]{1,5,8,4,7,6,5,3,1};
         nextPermutation2(nums);
 
         for (int i = 0; i < nums.length; i++)

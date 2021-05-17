@@ -2,6 +2,8 @@ package com.whut.algorithm.tree.BST;
 
 import com.whut.algorithm.tree.TreeNode;
 
+import java.util.Map;
+
 /**
  * @author Administrator
  * @version 1.0.0
@@ -138,8 +140,46 @@ public class BSTTree {
         return node;
     }
 
+    /**
+     * 统计树的结点个数
+     *
+     * @param root
+     * @return
+     */
+    private static int countNodes(TreeNode root) {
+        TreeNode l = root, r = root;
+
+        int hl = 0, hr = 0;
+        while (l != null) {
+            l = l.left;
+            hl++;
+        }
+
+        while (r != null) {
+            r = r.right;
+            hr++;
+        }
+
+        if (hl == hr)
+            return (int) (Math.pow(2, hl) - 1);
+
+        //否则安装普通统计
+        return 1 + countNodes(root.left) + countNodes(root.right);
+    }
+
 
     public static void main(String[] args) {
+        TreeNode treeNode1 = new TreeNode("1");
+        TreeNode treeNode2 = new TreeNode("2");
+        TreeNode treeNode3 = new TreeNode("3");
+        TreeNode treeNode4 = new TreeNode("4");
 
+        treeNode1.left = treeNode2;
+
+        treeNode1.right = treeNode3;
+
+        treeNode2.left = treeNode4;
+
+        System.out.println(countNodes(treeNode1));
     }
 }

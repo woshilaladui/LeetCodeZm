@@ -38,6 +38,7 @@ public class OpenTheLock {
         //当队列不空时
         while (!queue.isEmpty()) {
 
+            //控制当前这一层被访问完
             int sz = queue.size();
 
             //一次遍历队列的元素

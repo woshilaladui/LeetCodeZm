@@ -19,7 +19,7 @@ public class CombinationSumIv {
 
         backTrack(nums,target,result,path);
 
-//        for (List<Integer> list : result) {
+//        for (LinkedList<Integer> list : result) {
 //            for (Integer integer : list) {
 //                System.out.print(integer+" ");
 //            }

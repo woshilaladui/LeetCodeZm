@@ -62,6 +62,8 @@ public class BinarySearch {
 
         }
 
+        System.out.println(left);
+
         //检查left是否过界
         if (left >= nums.length || nums[left] != target)
             return -1;
@@ -69,10 +71,31 @@ public class BinarySearch {
         return left;
     }
 
+    private static int left_binary_search2(int[] nums, int target) {
+
+        int left = 0, right = nums.length;
+
+        while (left < right) {
+
+            int mid = (left+right)/2;
+            System.out.println("mid = " + mid);
+            if (nums[mid] > target) {
+                right = mid;
+            }else if(nums[mid] <target){
+                left = mid+1;
+            }else {
+                //往左靠
+                right = mid;
+            }
+        }
+
+        return left;
+    }
+
     public static void main(String[] args) {
         int[] nums = new int[]{10, 15, 16, 17, 17, 17, 17, 19, 22, 100, 101, 114};
 
-        System.out.println(right_binary_search(nums, 17));
+        System.out.println(left_binary_search(nums, 14));
 
     }
 
