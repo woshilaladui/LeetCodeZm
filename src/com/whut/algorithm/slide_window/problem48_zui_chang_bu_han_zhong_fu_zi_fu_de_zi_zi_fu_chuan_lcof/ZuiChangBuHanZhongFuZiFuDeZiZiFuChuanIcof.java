@@ -41,7 +41,6 @@ public class ZuiChangBuHanZhongFuZiFuDeZiZiFuChuanIcof {
                 window.put(d, window.get(d) - 1);
             }
 
-            //先是left++ 了所以长度len = right - left;
             res = Math.max(res, right - left);
 
         }

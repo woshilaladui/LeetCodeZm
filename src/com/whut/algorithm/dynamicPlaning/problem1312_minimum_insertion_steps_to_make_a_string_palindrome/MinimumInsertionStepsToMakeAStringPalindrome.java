@@ -39,7 +39,7 @@ public class MinimumInsertionStepsToMakeAStringPalindrome {
     }
 
     public static void main(String[] args) {
-        String s = "aba";
+        String s = "leetcode";
 
         System.out.println(minInsertions(s));
     }

@@ -68,7 +68,6 @@ public class TargetSum {
         return dp[nums.length - 1][target];
     }
 
-    //找零钱问题
     private static int findTargetSumWays(int[] nums, int S) {
 
         //定义 对于一个数组
@@ -97,10 +96,9 @@ public class TargetSum {
     public static void main(String[] args) {
 
 
-//        int[] nums = new int[]{0,0,0,0,0,0,0,0,1};
-//        int S = 1;
-//        System.out.println(findTargetSumWays(nums, S));
-        System.out.println(sumCount2(new int[]{1,1,1,1,1},4));
+        int[] nums = new int[]{0,0,0,0,0,0,0,0,1};
+        int S = 1;
+        System.out.println(findTargetSumWays(nums, S));
 
     }
 }

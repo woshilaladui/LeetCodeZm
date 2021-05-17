@@ -66,13 +66,15 @@ public class IncreasingSubsequences {
     public static void main(String[] args) {
 
         //int[] nums = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 1, 1, 1, 1};
-        int[] nums = new int[]{4,6,7,7};
+        int[] nums = new int[]{2,2,3,2,2};
 
         //[][]
         //Arrays.sort(nums);
 
         findSubsequences(nums);
 
+        System.out.println("maxLength = "+maxLength);
+        System.out.println("maxNums = "+maxNums);
     }
 
 }

@@ -51,16 +51,16 @@ public class combinationSumII {
 
     }
 
-//    public static LinkedList<LinkedList<Integer>> combinationSum3(int[] candidates, int target) {
-//        LinkedList<LinkedList<Integer>> res = new LinkedList<>();
-//        LinkedList<Integer> path = new LinkedList<>();
+//    public static List<List<Integer>> combinationSum3(int[] candidates, int target) {
+//        List<List<Integer>> res = new LinkedList<>();
+//        List<Integer> path = new LinkedList<>();
 //        Arrays.sort(candidates);
 //        backTrack(target, candidates, res, path,  0);
 //        return res;
 //    }
 //
-//    private static void backTrack(int target, int[] candidates,  LinkedList<LinkedList<Integer>> res,
-//                           LinkedList<Integer> path, int index) {
+//    private static void backTrack(int target, int[] candidates,  List<List<Integer>> res,
+//                           List<Integer> path, int index) {
 //        if (target == 0) {
 //            res.add(new LinkedList(path));
 //            return;

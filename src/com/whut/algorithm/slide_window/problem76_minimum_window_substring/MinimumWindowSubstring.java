@@ -15,7 +15,7 @@ public class MinimumWindowSubstring {
 
     private static String minWindow(String s, String t) {
 
-        if (s.equals(t))
+        if(s.equals(t))
             return t;
 
         Map<Character, Integer> need = new HashMap<>();
@@ -34,7 +34,7 @@ public class MinimumWindowSubstring {
             else
                 need.put(c, 1);
 
-            window.put(c, 0);
+            window.put(c,0);
         }
 
         int start = 0, len = Integer.MAX_VALUE;
@@ -58,7 +58,7 @@ public class MinimumWindowSubstring {
                 //在这里更新最小覆盖串
                 if ((right - left) < len) {
                     start = left;
-                    len = right - left;
+                    len = right -left;
                 }
 
                 //d是要移除窗口的字符串
@@ -68,26 +68,26 @@ public class MinimumWindowSubstring {
                 left++;
 
                 //对滑动窗口数据进行更新
-                if (need.containsKey(d)) {
-                    if (window.get(d).equals(need.get(d))) {
-                        vaild--;
+                if(need.containsKey(d)){
+                    if(window.get(d).equals(need.get(d))){
+                        vaild --;
                     }
-                    window.put(d, window.get(d) - 1);
+                    window.put(d,window.get(d)-1);
                 }
             }
 
 
         }//end while
 
-        return len == Integer.MAX_VALUE ? "" : s.substring(start, start + len);
+        return len == Integer.MAX_VALUE?"":s.substring(start,start+len);
     }
 
     public static void main(String[] args) {
 
-        String s = "bbaa";
-        String t = "aba";
+        String s ="bbaa";
+        String t ="aba";
 
-        System.out.println(minWindow(s, t));
+        System.out.println(minWindow(s,t));
 
     }
 }

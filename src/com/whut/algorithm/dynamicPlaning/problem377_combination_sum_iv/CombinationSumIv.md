@@ -33,9 +33,6 @@ target = 4
 
 ![](https://img-blog.csdnimg.cn/20200309204934173.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zOTAyOTE5NA==,size_16,color_FFFFFF,t_70)
 
-
-![](https://img-blog.csdnimg.cn/20200805200943934.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3d3eHkxOTk1,size_16,color_FFFFFF,t_70)
-
 方法：动态规划
 “动态规划”的两个步骤是思考“状态”以及“状态转移方程”。
 

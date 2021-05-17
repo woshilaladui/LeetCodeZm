@@ -17,19 +17,18 @@ public class Bag01 {
 
     /**
      * 采用一维数组
-     *
      * @param weight
      * @param value
      * @param capacity
      * @param nums
      * @return
      */
-    private static int maxValue2(int[] weight, int[] value, int capacity, int nums) {
+    private static int maxValue2(int[] weight, int[] value, int capacity, int nums){
 
         //dp数组之和前面数据有关 dp[i]<->dp[i-1]有关
-        int[] dp = new int[capacity + 1];
+        int[] dp = new int[capacity+1];
 
-        for (int i = 1; i <= nums; i++) {
+        for(int i=1;i<=nums;i++){
             //重后往前扫描,会覆盖数据
             /**
              *
@@ -39,10 +38,10 @@ public class Bag01 {
              * 将dp[5]更新了，但是后续计算dp[7]的时候需要用到dp[5]但是dp[5]被更新过，形成了脏数据
              *
              */
-            for (int j = capacity; j >= 1; j--) {
+            for(int j=capacity;j>=1;j--){
                 //放的下
-                if (j >= weight[i])
-                    dp[j] = Math.max(dp[j], dp[j - weight[i]] + value[i]);
+                if(j>=weight[i])
+                    dp[j] = Math.max(dp[j],dp[j-weight[i]]+value[i]);
             }
         }
 
@@ -81,9 +80,9 @@ public class Bag01 {
 
     public static void main(String[] args) {
 
-        int[] weight = new int[]{0, 2, 3, 4, 7};
-        int[] value = new int[]{0, 1, 3, 5, 9};
-        int nums = weight.length - 1;
+        int[] weight = new int[]{0,2, 3, 4, 7};
+        int[] value = new int[]{0,1, 3, 5, 9};
+        int nums = weight.length-1;
         int capacity = 10;
 
         System.out.println("maxValue1 = " + maxValue1(weight, value, capacity, nums));

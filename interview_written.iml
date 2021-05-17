@@ -7,9 +7,5 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="cglib:cglib:3.2.2" level="project" />
-    <orderEntry type="library" name="io.netty:netty-all:4.1.42.Final" level="project" />
-    <orderEntry type="library" name="com.hankcs.hanlp.restful:hanlp-restful:0.0.4" level="project" />
-    <orderEntry type="library" name="com.hankcs:hanlp:portable-1.8.1" level="project" />
   </component>
 </module>
