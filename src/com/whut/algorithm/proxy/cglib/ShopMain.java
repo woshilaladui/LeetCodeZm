@@ -19,6 +19,7 @@ public class ShopMain {
 
     public static void main(String[] args) {
 
+
         TaoBaoProxy taoBaoProxy = new TaoBaoProxy();
 
         UsbKingFactory usbKingFactory = taoBaoProxy.getProxy(UsbKingFactory.class);

@@ -1,14 +1,14 @@
-package com.whut.algorithm.dynamicPlaning.problem10_regular_expression_matching;
+package com.whut.algorithm.high_frequence.problem_offer19_zheng_ze_biao_da_shi_pi_pei_lcof;
 
 /**
  * @author Administrator
  * @version 1.0.0
- * @date 2020/12/18 15:55
+ * @date 2021/5/18 11:54
  * @desription
  */
-public class RegularExpressionMatching {
+public class ZhengZeBiaoDaShiPiPeiLcof {
 
-    private static boolean isMatch(String s, String p) {
+    public boolean isMatch(String s, String p) {
 
         char[] arrayS = s.toCharArray();
         char[] arrayP = p.toCharArray();
@@ -74,13 +74,9 @@ public class RegularExpressionMatching {
         }
 
         return dp[lenS][lenP];
-
     }
 
     public static void main(String[] args) {
 
-        String text = "baaa";
-        String pattern = "baaa*";
-        System.out.println(isMatch(text, pattern));
     }
 }
