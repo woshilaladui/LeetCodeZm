@@ -1,4 +1,4 @@
-package com.whut.algorithm.high_frequence.problem_offer_21_diao_zheng_shu_zu_shun_xu_shi_qi_shu_wei_yu_ou_shu_qian_mian_lcof;
+package com.whut.algorithm.high_frequence.problem_offer21_diao_zheng_shu_zu_shun_xu_shi_qi_shu_wei_yu_ou_shu_qian_mian_lcof;
 
 /**
  * @author Administrator
