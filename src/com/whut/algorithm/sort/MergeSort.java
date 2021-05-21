@@ -10,6 +10,13 @@ public class MergeSort {
 
     private static int result = 0;
 
+    /**
+     *
+     * @param A
+     * @param low
+     * @param mid
+     * @param high
+     */
     public static void merge(int[] A, int low, int mid, int high) {
 
         int i, j, k;
@@ -19,7 +26,7 @@ public class MergeSort {
 
         if (high + 1 - low >= 0) System.arraycopy(A, low, B, low, high + 1 - low);
 
-        for (i = low, j = mid + 1, k = i; i <= mid && j <= high; k++) {
+        for (i = low, j = mid + 1, k = low; i <= mid && j <= high; k++) {
             if (B[i] <= B[j]) {
                 result += (high - j + 1) * B[i];
                 A[k] = B[i++];
@@ -35,6 +42,14 @@ public class MergeSort {
             A[k++] = B[j++];
     }
 
+    /**
+     *
+     * 归并[low,high] 闭区间
+     *
+     * @param A
+     * @param low
+     * @param high
+     */
     public static void mergeSort(int[] A, int low, int high) {
         //  if (low < high) {
 
@@ -49,7 +64,7 @@ public class MergeSort {
     }
 
     public static void main(String[] args) {
-        int[] A = new int[]{1, 3, 5, 2, 4, 6};
+        int[] A = new int[]{7,5,6,4};
 
         mergeSort(A, 0, A.length - 1);
 
