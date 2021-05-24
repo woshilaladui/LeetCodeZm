@@ -102,6 +102,49 @@ public class ImplementTriePrefixTree {
             return true;
         }
 
+        public boolean searchWord(String word) {
+            if (word == null || word.length() == 0)
+                return false;
+            return searchWord(word, root);
+        }
+
+        public boolean searchWord(String word, TrieNode root) {
+
+
+            TrieNode currentNode = root;
+
+            for (int i = 0; i < word.length(); i++) {
+                char ch = word.charAt(i);
+
+                if (ch != '.') {
+                    if (!currentNode.next.containsKey(ch))
+                        return false;
+                }
+
+                if (ch == '.') {
+                    for (char c = 'a'; c <= 'z'; c++) {
+                        // 如果存在下一个字母，则从下一个字母开始再继续做检查
+                        if (currentNode.next.get(c) != null) {
+                            if (searchWord(word.substring(i + 1), currentNode.next.get(c))) {
+                                return true;
+                            }
+                        }
+                    }
+                    return false;
+
+                }
+
+                currentNode = currentNode.next.get(ch);
+
+            }
+
+            if (currentNode.end == 0)
+                return false;
+
+            return true;
+
+        }
+
         /**
          * 同search操作基本相同，只是这里判断到最后一个字符的时候，
          * 不需要判断end值。因为这里只需要检查前缀是否存在。
@@ -137,14 +180,14 @@ public class ImplementTriePrefixTree {
             for (int i = 0; i < word.length(); i++) {
                 char ch = word.charAt(i);
 
-                if((currentNode.next.get(ch).path-=count) == 0){
+                if ((currentNode.next.get(ch).path -= count) == 0) {
                     //没有路径就删除该结点
                     currentNode.next.remove(ch);
                 }
                 currentNode = currentNode.next.get(ch);
             }
 
-            currentNode.end-=count;
+            currentNode.end -= count;
         }
 
         public int getWordCount(String word) {
@@ -163,6 +206,11 @@ public class ImplementTriePrefixTree {
     }
 
     public static void main(String[] args) {
+        Trie trie = new Trie();
+
+        trie.insert("bad");
+        System.out.println(trie.search("bad"));
+        System.out.println(trie.searchWord("b.d"));
 
     }
 
