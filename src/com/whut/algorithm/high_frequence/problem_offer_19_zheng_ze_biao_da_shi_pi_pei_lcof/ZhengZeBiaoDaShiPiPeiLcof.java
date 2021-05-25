@@ -1,4 +1,4 @@
-package com.whut.algorithm.high_frequence.problem_offer19_zheng_ze_biao_da_shi_pi_pei_lcof;
+package com.whut.algorithm.high_frequence.problem_offer_19_zheng_ze_biao_da_shi_pi_pei_lcof;
 
 /**
  * @author Administrator

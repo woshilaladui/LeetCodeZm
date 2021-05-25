@@ -1,4 +1,4 @@
-package com.whut.algorithm.high_frequence.problem_offer42_lian_xu_zi_shu_zu_de_zui_da_he_lcof;
+package com.whut.algorithm.high_frequence.problem_offer_42_lian_xu_zi_shu_zu_de_zui_da_he_lcof;
 
 /**
  * @author Administrator

@@ -1,4 +1,4 @@
-package com.whut.algorithm.high_frequence.problem_offer10_qing_wa_tiao_tai_jie_wen_ti_lcof;
+package com.whut.algorithm.high_frequence.problem_offer_10_qing_wa_tiao_tai_jie_wen_ti_lcof;
 
 /**
  * @author Administrator

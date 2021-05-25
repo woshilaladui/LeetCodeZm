@@ -1,8 +1,4 @@
-package com.whut.algorithm.high_frequence.problem_offer36_er_cha_sou_suo_shu_yu_shuang_xiang_lian_biao_lcof;
-
-import com.whut.algorithm.circular_dependence.A;
-import com.whut.algorithm.list.LinkedList;
-import com.whut.algorithm.tree.TreeNode;
+package com.whut.algorithm.high_frequence.problem_offer_36_er_cha_sou_suo_shu_yu_shuang_xiang_lian_biao_lcof;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.whut.algorithm.high_frequence.problem_offer32_cong_shang_dao_xia_da_yin_er_cha_shu_iii_lcof;
+package com.whut.algorithm.high_frequence.problem_offer_32_cong_shang_dao_xia_da_yin_er_cha_shu_iii_lcof;
 
 import java.util.*;
 
