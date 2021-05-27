@@ -73,6 +73,7 @@ public class LongestSubstringWithAtLeastKRepeatingCharacters {
     public static void main(String[] args) {
         LongestSubstringWithAtLeastKRepeatingCharacters longestSubstringWithAtLeastKRepeatingCharacters = new LongestSubstringWithAtLeastKRepeatingCharacters();
 
+
         /**
          * "aabcabb"
          * 3

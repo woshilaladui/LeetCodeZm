@@ -27,7 +27,7 @@ public class ShuZuZhongDeNiXuDuiLcof {
 
         int[] temp = new int[nums.length];
 
-        System.arraycopy(nums, 0, temp, 0, nums.length);
+        //System.arraycopy(nums, 0, temp, 0, nums.length);
 
         return reversePairs(nums, 0, nums.length - 1, temp);
 
@@ -69,7 +69,7 @@ public class ShuZuZhongDeNiXuDuiLcof {
      * @return
      */
     private int merge(int[] nums, int low, int mid, int high, int[] temp) {
-        //必区间
+        //闭区间
         for (int i = low; i <= high; i++)
             temp[i] = nums[i];
 
