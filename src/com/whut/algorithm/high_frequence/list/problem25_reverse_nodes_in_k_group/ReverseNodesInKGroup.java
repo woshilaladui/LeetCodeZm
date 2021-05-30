@@ -1,11 +1,4 @@
-package com.whut.algorithm.list.problem25_reverse_nodes_in_k_group;
-
-import com.whut.algorithm.list.LinkedList;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.Stack;
+package com.whut.algorithm.high_frequence.list.problem25_reverse_nodes_in_k_group;
 
 /**
  * @author Administrator
@@ -15,7 +8,7 @@ import java.util.Stack;
  */
 public class ReverseNodesInKGroup {
 
-    public class ListNode {
+    public static class ListNode {
         int val;
         ListNode next;
 
@@ -33,7 +26,7 @@ public class ReverseNodesInKGroup {
     }
 
     /**
-     * 反转[a,b]区间的链表
+     * 反转[a,b)区间的链表
      * @param a
      * @param b
      * @return
@@ -84,6 +77,21 @@ public class ReverseNodesInKGroup {
     }
 
     public static void main(String[] args) {
+        ListNode listNode1 = new ListNode(1);
+        ListNode listNode2 = new ListNode(2);
+        ListNode listNode3 = new ListNode(3);
+        ListNode listNode4 = new ListNode(4);
 
+        listNode1.next = listNode2;
+        listNode2.next = listNode3;
+        listNode3.next = listNode4;
+
+
+        listNode1 = reverse2(listNode1,null);
+
+        while (listNode1!=null){
+            System.out.print(listNode1.val+" ");
+            listNode1 = listNode1.next;
+        }
     }
 }

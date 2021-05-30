@@ -1,4 +1,4 @@
-package com.whut.algorithm.list;
+package com.whut.algorithm.high_frequence.list;
 
 
 /**
