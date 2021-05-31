@@ -62,7 +62,6 @@ public class BinarySearch {
 
         }
 
-        System.out.println(left);
 
         //检查left是否过界
         if (left >= nums.length || nums[left] != target)
@@ -95,7 +94,7 @@ public class BinarySearch {
     public static void main(String[] args) {
         int[] nums = new int[]{10, 15, 16, 17, 17, 17, 17, 19, 22, 100, 101, 114};
 
-        System.out.println(left_binary_search(nums, 14));
+        System.out.println(left_binary_search(nums, 17));
 
     }
 
