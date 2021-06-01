@@ -13,4 +13,6 @@
 2. target > nums[right] || target < nums[mid]
 > 这里就是和上面的第二种情况对应，落在 mid 的左半部分，我们尽量将两个指针赶到一起
 
+
+[一文带你搞定二分查找及多个变种](https://leetcode-cn.com/problems/find-minimum-in-rotated-sorted-array/solution/yi-wen-dai-ni-gao-ding-er-fen-cha-zhao-j-00kj/)
  
