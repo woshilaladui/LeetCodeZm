@@ -22,6 +22,39 @@ public class CoinChange {
 
     }
 
+    /**
+     * [1,2,5]
+     * <p>
+     * F(7) = min{F(7-1),F(7-2),F(7-5)} + 1 (其中这个1代表使用1，2，5这个纸币)
+     *
+     * @param coins
+     * @param amount
+     * @return
+     */
+    public static int coinChange1(int[] coins, int amount) {
+        int max = amount + 1;
+
+        int[] dp = new int[amount + 1];
+
+        Arrays.fill(dp, max);
+
+        dp[0] = 0;
+        for (int i = 1; i <= amount; i++) {
+            for (int j = 0; j < coins.length; j++) {
+                if (coins[j] <= i)
+                    dp[i] = Math.min(dp[i], dp[i - coins[j]] + 1);
+            }
+        }
+
+        //dp[amount] = max 说明 不能兑换
+        return dp[amount] == max ? -1 : dp[amount];
+    }
+
+    /**
+     * @param coins
+     * @param amount
+     * @return
+     */
     private static int doCoinChange(int[] coins, int amount) {
         if (amount == 0)
             return 0;
