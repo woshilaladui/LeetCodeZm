@@ -1,4 +1,4 @@
-package com.whut.algorithm.circular_dependence;
+package com.whut.study.circular_dependence;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;

@@ -1,6 +1,6 @@
 package com.whut.algorithm.high.frequence.problem350_intersection_of_two_arrays_ii;
 
-import com.whut.algorithm.circular_dependence.A;
+import com.whut.study.circular_dependence.A;
 
 import java.util.Arrays;
 
