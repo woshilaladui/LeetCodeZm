@@ -14,6 +14,8 @@ public class CombinationSumIv {
 
     /**
      *
+     * 思想：与零钱兑换问题1相似
+     *
      * 采用拆解
      *
      * dp[4] = 所有数字组合成target = 4的可能性

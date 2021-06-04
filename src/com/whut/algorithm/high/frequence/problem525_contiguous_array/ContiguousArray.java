@@ -1,6 +1,8 @@
 package com.whut.algorithm.high.frequence.problem525_contiguous_array;
 
 import java.util.HashMap;
+import java.util.Vector;
+import java.util.concurrent.DelayQueue;
 
 /**
  * @author Administrator
@@ -52,7 +54,16 @@ public class ContiguousArray {
     }
 
     public static void main(String[] args) {
-        ContiguousArray contiguousArray = new ContiguousArray();
-        System.out.println(contiguousArray.findMaxLength(new int[]{0,0,0,1,0,1}));
+//        ContiguousArray contiguousArray = new ContiguousArray();
+//        System.out.println(contiguousArray.findMaxLength(new int[]{0,0,0,1,0,1}));
+
+        HashMap<String,Integer> map = new HashMap<>();
+
+        map.put("abc",12);
+
+        Integer temp = map.put("abc",13);
+
+        System.out.println(temp);
+        System.out.println(map.get("abc"));
     }
 }

@@ -74,11 +74,11 @@ public class TargetSum {
         //定义 对于一个数组
         /**
          *
-         * 有 1.sum(odd) -sum(even) = target
-         *    2.sum(odd)+sum(even) + sum(odd) -sum(even) = target + sum(odd)+sum(even)
-         *                           2*sum(odd)          = target +sum
-         *                           sum(odd)            = (target+sum)/2
-         *  其中sum(odd) = even,即奇数的和一定为偶数 ,故(target+sum)%2 == 0
+         * 有 1.sum(positive) -sum(negative) = target
+         *    2.sum(positive)+sum(negative) + sum(positive) -sum(negative) = target + sum(positive)+sum(negative)
+         *                           2*sum(positive)          = target +sum
+         *                           sum(positive)            = (target+sum)/2
+         *  其中sum(positive)  一定为整数，说明(target + sum)/2一定为偶数
          *  并且sum>=target
          *
          */
@@ -100,7 +100,7 @@ public class TargetSum {
 //        int[] nums = new int[]{0,0,0,0,0,0,0,0,1};
 //        int S = 1;
 //        System.out.println(findTargetSumWays(nums, S));
-        System.out.println(sumCount2(new int[]{1,1,1,1,1},4));
+        System.out.println(sumCount2(new int[]{1,1,1,1,1},0));
 
     }
 }
