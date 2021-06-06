@@ -1,4 +1,4 @@
-package com.whut.algorithm.high.frequence.bfs.problem752_open_the_lock;
+package com.whut.algorithm.high.frequence.tree.bfs.problem752_open_the_lock;
 
 import java.util.*;
 

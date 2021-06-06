@@ -1,4 +1,4 @@
-package com.whut.algorithm.high.frequence.bfs;
+package com.whut.algorithm.high.frequence.tree.bfs;
 
 import java.util.*;
 
