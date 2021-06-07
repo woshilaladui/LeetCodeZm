@@ -1,5 +1,6 @@
 package com.whut.algorithm.high.frequence.tree.bfs.problem112_path_sum;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -40,6 +41,9 @@ public class PathSum {
         if(root == null)
             return false;
 
+        HashMap<Integer,Integer> hashMap = null;
+
+
         //根节点入队列
         queue.offer(root);
         sumQueue.offer(root.val);
@@ -71,6 +75,12 @@ public class PathSum {
         }
 
         return false;
+    }
+
+    private int getS(){
+        HashMap<Integer,Integer> map = new HashMap<>();
+
+        return map.get(1);
     }
 
     public static void main(String[] args) {

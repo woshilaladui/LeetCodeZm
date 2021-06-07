@@ -1,6 +1,9 @@
 package com.whut.algorithm.high.frequence.problem20_valid_parentheses;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Stack;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @author Administrator
@@ -9,6 +12,50 @@ import java.util.Stack;
  * @desription
  */
 public class ValidParentheses {
+
+    /**
+     * 不适合 要求顺序
+     * @param s
+     * @return
+     */
+    public static boolean isValid1(String s) {
+        HashMap<Character, Integer> map = new HashMap<>();
+
+        char[] cArray = s.toCharArray();
+
+        for (char c : cArray) {
+
+            switch (c) {
+                case '(':
+                case '[':
+                case '{':
+                    if (!map.containsKey(c)) {
+                        map.put(c, 1);
+                        continue;
+                    }
+                    map.put(c, map.get(c) + 1);
+                    break;
+                case ')':
+                    map.put('(', map.getOrDefault('(',0) - 1);
+                    break;
+                case ']':
+                    map.put('[', map.getOrDefault('[',0) - 1);
+                    break;
+                case '}':
+                    map.put('{', map.getOrDefault('{',0) - 1);
+                    break;
+
+            }
+        }//end for
+
+        for (Map.Entry entry : map.entrySet()) {
+            if (!entry.getValue().equals(0))
+                return false;
+        }
+
+        return true;
+
+    }
 
     public static boolean isValid(String s) {
 
@@ -21,7 +68,7 @@ public class ValidParentheses {
         for (int i = 0; i < n; i++) {
             char c = c_s[i];
 
-            if(stack.empty())
+            if (stack.empty())
                 stack.push(c);
             else {
                 switch (c) {
@@ -52,9 +99,6 @@ public class ValidParentheses {
             }
 
 
-
-
-
         }
 
         return stack.empty();
@@ -62,6 +106,7 @@ public class ValidParentheses {
 
     public static void main(String[] args) {
         //"{[]}"
-        System.out.println(isValid("]"));
+        //"([)]"
+        System.out.println(isValid1("([)]"));
     }
 }
