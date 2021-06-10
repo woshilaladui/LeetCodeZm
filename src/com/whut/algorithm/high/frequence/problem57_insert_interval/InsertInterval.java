@@ -1,7 +1,5 @@
 package com.whut.algorithm.high.frequence.problem57_insert_interval;
 
-import com.whut.algorithm.dynamicPlaning.test.M;
-
 import java.util.*;
 
 /**

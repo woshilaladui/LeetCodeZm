@@ -1,6 +1,6 @@
 package com.whut.study.proxy;
 
-import com.whut.algorithm.dynamicPlaning.sub_string.Test;
+import com.whut.algorithm.high.frequence.dynamicPlaning.sub_string.Test;
 import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;

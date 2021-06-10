@@ -3,6 +3,7 @@ package com.whut.algorithm.high.frequence.problem20_valid_parentheses;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -108,5 +109,7 @@ public class ValidParentheses {
         //"{[]}"
         //"([)]"
         System.out.println(isValid1("([)]"));
+        ConcurrentHashMap<Integer,Integer> map = new ConcurrentHashMap<>();
+
     }
 }
