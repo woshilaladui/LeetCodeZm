@@ -1,9 +1,8 @@
-package com.whut.algorithm.sort;
+package com.whut.algorithm.high.frequence.sort;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * @author Administrator

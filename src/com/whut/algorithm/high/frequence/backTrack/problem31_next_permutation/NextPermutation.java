@@ -1,8 +1,8 @@
 package com.whut.algorithm.high.frequence.backTrack.problem31_next_permutation;
 
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import com.whut.study.knowledge_graph.Main;
+
+import java.util.*;
 
 /**
  * @author Administrator
@@ -139,11 +139,19 @@ public class NextPermutation {
     }
 
     public static void main(String[] args) {
-        int[] nums = new int[]{1,5,8,4,7,6,5,3,1};
+
+
+
+        int[] nums = new int[]{4,5,7,3,2,1};
         nextPermutation2(nums);
 
         for (int i = 0; i < nums.length; i++)
             System.out.print(nums[i] + " ");
+        System.out.println(
+
+        );
+
+        //
     }
 
 }

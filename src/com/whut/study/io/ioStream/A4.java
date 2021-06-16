@@ -36,7 +36,7 @@ public class A4 {
             while ((result = bufferedReader.readLine()) != null) {
                 bufferedWriter.write(result);  //把内容写入文件
                 //换行，result 是一行数据，所以每写一行就要换行
-                bufferedWriter.newLine();
+                //bufferedWriter.newLine();
             }
 
             bufferedWriter.flush();  //强制把数组内容写入文件

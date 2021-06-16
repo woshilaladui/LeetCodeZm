@@ -1,4 +1,4 @@
-package com.whut.algorithm.sort;
+package com.whut.algorithm.high.frequence.sort;
 
 /**
  * @author Administrator
