@@ -1,4 +1,4 @@
-package com.whut.study.thread.thread;
+package com.whut.study.thread.thread.commonConsumerAndProducer;
 
 /**
  * @author Administrator

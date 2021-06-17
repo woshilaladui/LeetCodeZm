@@ -1,4 +1,4 @@
-package com.whut.study.thread.thread;
+package com.whut.study.thread.thread.conditionConsumerAndProducer;
 
 import java.util.PriorityQueue;
 import java.util.concurrent.locks.Condition;

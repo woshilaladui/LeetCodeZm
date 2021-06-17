@@ -1,4 +1,4 @@
-package com.whut.study.thread.thread;
+package com.whut.study.thread.thread.conditionConsumerAndProducer;
 
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
@@ -61,10 +61,12 @@ public class ConTest {
             try {
                 lock.lock();
                 System.out.println("我拿到锁"+this.currentThread().getName());
+
                 condition.signalAll();
                 System.out.println("我发出了一个信号："+this.currentThread().getName());
             } finally{
                 lock.unlock();
+                System.out.println("end preduce");
             }
         }
     }
