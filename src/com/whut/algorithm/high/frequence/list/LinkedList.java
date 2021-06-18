@@ -41,7 +41,7 @@ public class LinkedList {
         if (head == null || head.next == null)
             return head;
         //last为反转后的序列的头结点
-        ListNode last = reverse(head.next);
+        ListNode last = recursionReverse(head.next);
         head.next.next = head;
         head.next = null;
         return last;
