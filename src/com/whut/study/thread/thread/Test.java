@@ -1,5 +1,9 @@
 package com.whut.study.thread.thread;
 
+import com.whut.study.thread.thread.commonConsumerAndProducer.Consumer;
+import com.whut.study.thread.thread.commonConsumerAndProducer.Producer;
+import com.whut.study.thread.thread.commonConsumerAndProducer.Product;
+
 import java.util.PriorityQueue;
 import java.util.Queue;
 
@@ -11,29 +15,16 @@ import java.util.Queue;
  */
 public class Test {
     public static void main(String[] args) {
-//        Product product = new Product();
-//
-//        Consumer consumer = new Consumer(product);
-//
-//        Thread t1 = new Thread(consumer);
-//
-//        Producer producer = new Producer(product);
-//        Thread t2 = new Thread(producer);
-//
-//        t1.start();
-//        t2.start();
+        Product product = new Product();
 
+        Consumer consumer = new Consumer(product);
 
-        Queue<Integer> queue = new PriorityQueue<>();
+        Thread t1 = new Thread(consumer);
 
-        queue.add(1);
-        queue.add(5);
-        queue.add(3);
-        queue.add(1);
+        Producer producer = new Producer(product);
+        Thread t2 = new Thread(producer);
 
-        while (!queue.isEmpty()){
-            System.out.println(queue.poll());
-        }
-
+        t1.start();
+        t2.start();
     }
 }
