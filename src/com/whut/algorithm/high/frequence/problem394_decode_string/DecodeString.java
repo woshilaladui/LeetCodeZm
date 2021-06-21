@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Stack;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * @author Administrator
@@ -31,7 +32,7 @@ public class DecodeString {
      * @return
      */
     public static String decodeString(String s) {
-        
+
         int len = s.length();
         int i = 0;
         char[] arrayS = s.toCharArray();
@@ -91,6 +92,8 @@ public class DecodeString {
 
     public static void main(String[] args) {
         //"3[a]2[bc]"
+        ReentrantLock lock = new ReentrantLock();
+        lock.lock();
         System.out.println(decodeString("100[leetcode]"));
     }
 }

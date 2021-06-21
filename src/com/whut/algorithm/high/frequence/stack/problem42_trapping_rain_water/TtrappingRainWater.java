@@ -1,4 +1,4 @@
-package com.whut.algorithm.high.frequence.problem42_trapping_rain_water;
+package com.whut.algorithm.high.frequence.stack.problem42_trapping_rain_water;
 
 import java.util.*;
 
@@ -17,7 +17,7 @@ public class TtrappingRainWater {
      * @return
      */
     public int trap(int[] height) {
-        //维护一个单调栈，栈顶到栈底一次减少
+        //维护一个单调栈，栈顶到栈底依次减少（递增减）
         //存放数组下标
         Stack<Integer> stack = new Stack<>();
 
@@ -25,7 +25,7 @@ public class TtrappingRainWater {
 
         for (int i = 0; i < height.length; i++) {
             //可以形成接水区域
-            while (!stack.empty() && height[i] > height[stack.peek()]) {
+            while (!stack.empty() && height[i] >= height[stack.peek()]) {
 
                 int pop = stack.pop();
 

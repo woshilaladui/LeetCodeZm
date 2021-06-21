@@ -11,6 +11,11 @@ import java.util.Map;
  */
 public class FindTheDuplicateNumber {
 
+    /**
+     * 注意题目条件 n+1 个数字 x在[1,n]之间
+     * @param nums
+     * @return
+     */
     public static int findDuplicate(int[] nums) {
         int fast = 0, slow = 0;
         while(true){
@@ -19,11 +24,14 @@ public class FindTheDuplicateNumber {
             if(fast == slow)
                 break;
         }
-        int finder = 0;
+
+        //慢指针从头开始
+        slow = 0;
+
         while(true){
-            finder = nums[finder];
+            fast = nums[fast];
             slow = nums[slow];
-            if(slow == finder)
+            if(slow == fast)
                 break;
         }
         return slow;
