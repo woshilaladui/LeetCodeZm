@@ -1,7 +1,5 @@
 package com.whut.algorithm.high.frequence.list.problem143_reorder_list;
 
-import com.whut.algorithm.high.frequence.tree.TreeUtils;
-
 import java.util.ArrayList;
 import java.util.List;
 

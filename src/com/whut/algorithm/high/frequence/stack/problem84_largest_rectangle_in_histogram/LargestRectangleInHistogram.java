@@ -50,6 +50,15 @@ public class LargestRectangleInHistogram {
      *
      * https://leetcode-cn.com/problems/largest-rectangle-in-histogram/solution/bao-li-jie-fa-zhan-by-liweiwei1419/
      * 单调栈
+     *
+     * AAa
+     *
+     *
+     *
+     *
+     *
+     * 维护一个单调递减的栈
+     *
      * @param heights
      * @return
      */
