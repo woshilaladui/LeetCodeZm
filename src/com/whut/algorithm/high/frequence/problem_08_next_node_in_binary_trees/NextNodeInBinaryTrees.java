@@ -1,7 +1,4 @@
-package com.whut.algorithm.high.frequence.offer.problem_08_next_node_in_binary_trees;
-
-import com.whut.algorithm.high.frequence.offer.problem_offer_07_chong_jian_er_cha_shu_lcof.ChongJianErChaShuLcof;
-import org.apdplat.word.vector.T;
+package com.whut.algorithm.high.frequence.problem_08_next_node_in_binary_trees;
 
 /**
  * @author Administrator

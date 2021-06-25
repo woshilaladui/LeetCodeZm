@@ -1,4 +1,4 @@
-package com.whut.algorithm.high.frequence.offer.problem_offer51_shu_zu_zhong_de_ni_xu_dui_lcof;
+package com.whut.algorithm.high.frequence.offer.problem_offer_51_shu_zu_zhong_de_ni_xu_dui_lcof;
 
 /**
  * @author Administrator
