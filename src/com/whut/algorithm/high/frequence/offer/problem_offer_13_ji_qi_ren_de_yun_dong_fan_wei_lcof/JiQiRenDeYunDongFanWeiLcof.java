@@ -2,10 +2,7 @@ package com.whut.algorithm.high.frequence.offer.problem_offer_13_ji_qi_ren_de_yu
 
 import com.whut.study.io.netty.chat.Test;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author Administrator
@@ -14,6 +11,55 @@ import java.util.Map;
  * @desription
  */
 public class JiQiRenDeYunDongFanWeiLcof {
+
+    /**
+     * 不需要遍历4个方向，只需要遍历下右方向即可
+     * @param m
+     * @param n
+     * @param k
+     * @return
+     */
+    public int movingCount2(int m, int n, int k) {
+        if (k == 0) {
+            return 1;
+        }
+        Queue<int[]> queue = new LinkedList<int[]>();
+        // 向右和向下的方向数组
+        int[] dx = {0, 1};
+        int[] dy = {1, 0};
+        boolean[][] vis = new boolean[m][n];
+        queue.offer(new int[]{0, 0});
+        vis[0][0] = true;
+        int ans = 1;
+        while (!queue.isEmpty()) {
+            int sz = queue.size();
+            for (int index = 0; index < sz; index++) {
+                int[] cell = queue.poll();
+                int x = cell[0], y = cell[1];
+                for (int i = 0; i < 2; ++i) {
+                    int tx = dx[i] + x;
+                    int ty = dy[i] + y;
+                    if (tx < 0 || tx >= m || ty < 0 || ty >= n || vis[tx][ty] || get(tx) + get(ty) > k) {
+                        continue;
+                    }
+                    queue.offer(new int[]{tx, ty});
+                    vis[tx][ty] = true;
+                    ans++;
+                }
+            }
+        }
+        return ans;
+    }
+
+    private int get(int x) {
+        int res = 0;
+        while (x != 0) {
+            res += x % 10;
+            x /= 10;
+        }
+        return res;
+    }
+
 
     private static int[][] directions = new int[][]{
             {0, 1},//右
@@ -24,11 +70,11 @@ public class JiQiRenDeYunDongFanWeiLcof {
 
     /**
      * 这样写是错误的，直接暴力写 如:
-     *
+     * <p>
      * m = 16, n = 8 k = 4
-     *
-     *  它在之前肯定到过(5,0)
-     *  机器人到不了(10,0)这个点
+     * <p>
+     * 它在之前肯定到过(5,0)
+     * 机器人到不了(10,0)这个点
      *
      * @param m
      * @param n
@@ -39,7 +85,7 @@ public class JiQiRenDeYunDongFanWeiLcof {
         int count = 0;
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
-                if(isSmallerK(i,j,k)){
+                if (isSmallerK(i, j, k)) {
                     System.out.println("x = " + i + "  y = " + j);
                     count++;
                 }
@@ -83,7 +129,7 @@ public class JiQiRenDeYunDongFanWeiLcof {
                 //count++;
                 visited[newX][newY] = true;
                 list.add("x = " + newX + "  y = " + newY);
-                System.out.println("x = " + newX +"  y = " + newY);
+                System.out.println("x = " + newX + "  y = " + newY);
                 backTrack(
                         m,
                         n,
@@ -125,7 +171,7 @@ public class JiQiRenDeYunDongFanWeiLcof {
         int m = 16;
         int n = 8;
         int k = 4;
-        System.out.println("count = "+jiQiRenDeYunDongFanWeiLcof.movingCount(m, n, k));
+        System.out.println("count = " + jiQiRenDeYunDongFanWeiLcof.movingCount(m, n, k));
 
         /**
          * x = 0  y = 1
