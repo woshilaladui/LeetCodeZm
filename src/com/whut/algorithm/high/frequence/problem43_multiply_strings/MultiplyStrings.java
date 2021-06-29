@@ -19,7 +19,7 @@ public class MultiplyStrings {
 
         StringBuilder sb = new StringBuilder();
 
-        while (i >= 0 || j >= 0 || carry != 0) {
+        while (i >= 0 || j >= 0) {
             int x = i >= 0 ? arrayNum1[i] - '0' : 0;
             int y = j >= 0 ? arrayNum2[j] - '0' : 0;
 
@@ -30,6 +30,9 @@ public class MultiplyStrings {
             i--;
             j--;
         }
+
+        if (carry != 0)
+            sb.append(carry % 10);
 
         return sb.reverse().toString();
     }
@@ -73,7 +76,7 @@ public class MultiplyStrings {
             if (carry != 0)
                 cur.append(carry % 10);
 
-            result = addString(result,cur.reverse().toString());
+            result = addString(result, cur.reverse().toString());
 
         }
 
@@ -81,10 +84,12 @@ public class MultiplyStrings {
 
     }
 
+
     public static void main(String[] args) {
         String num1 = "123";
         String num2 = "456";
         System.out.println(multiply(num1, num2));
+        System.out.println(Integer.parseInt("012"));
     }
 
 }

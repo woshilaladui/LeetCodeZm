@@ -64,21 +64,24 @@ public class PowxN {
      * 77 >> 1
      *
      * 0  1  0  0  1  1  0  这一位不计算
-     * 0  0  1  0  0  1  1  & 1 ->  这一位要计算
+     * 0  0  0  0  0  0  1
+     *
+     * 0  0  1  0  0  1  1
+     * 0  0  0  0  0  0  1 & 1 ->  这一位要计算
      * @param x
      * @param N
      * @return
      */
     public static double quickMu2(double x, long N) {
         double result = 1.0;
-        double contibute = x;
+        double contribute = x;
 
         while (N > 0) {
             if ((N &1)  == 1) {
-                result *= contibute;
+                result *= contribute;
             }
-            contibute *= contibute;
-            N /= 2;
+            contribute *= contribute;
+            N = N >> 1;
         }
 
         return result;
