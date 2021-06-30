@@ -76,7 +76,61 @@ public class ZhengZeBiaoDaShiPiPeiLcof {
         return dp[lenS][lenP];
     }
 
-    public static void main(String[] args) {
 
+    /**
+     * 状态机求解
+     *
+     * @param s
+     * @param p
+     * @return
+     */
+    public boolean isMatch2(String s, String p) {
+
+        //递归返回条件
+
+        return isMatch2(s, p, 0, 0);
+    }
+
+    public boolean isMatch2(String s, String p, int indexS, int indexP) {
+
+        //递归返回条件
+        if (indexS == s.length() && indexP == p.length())
+            return true;
+
+        if (indexS < s.length() && indexP == p.length())
+            return false;
+
+        // * 号的情况
+        if (indexP != p.length() - 1 && p.charAt(indexP + 1) == '*') {
+            if (indexS != s.length() - 1 && indexP != p.length() - 1 && (s.charAt(indexS) == p.charAt(indexP) || p.charAt(indexP) == '.')) {
+                // 去下一个状态
+                //相当于出现1次
+                return isMatch2(s, p, indexS + 1, indexP + 2) ||
+                        //待在原处
+                        //相当于复制了一次
+                        isMatch2(s, p, indexS + 1, indexP) ||
+                        //相当于跳过a*
+                        isMatch2(s, p, indexS, indexP + 2);
+            } else {
+                //不相等则让他消失
+                return isMatch2(s, p, indexS, indexP + 2);
+            }
+        }//end if
+
+        // . 的情况
+        if (indexS != s.length() - 1 && indexP != p.length() - 1 && (s.charAt(indexS) == p.charAt(indexP) || p.charAt(indexP) == '.'))
+            return isMatch2(s, p, indexS + 1, indexP + 1);
+
+        return false;
+    }
+
+    public static void main(String[] args) {
+        ZhengZeBiaoDaShiPiPeiLcof zhengZeBiaoDaShiPiPeiLcof = new ZhengZeBiaoDaShiPiPeiLcof();
+
+        /**
+         * "mississippi"
+         * "mis*is*ip*."
+         */
+        System.out.println(zhengZeBiaoDaShiPiPeiLcof.isMatch2("ab", ".*c"));
     }
 }
