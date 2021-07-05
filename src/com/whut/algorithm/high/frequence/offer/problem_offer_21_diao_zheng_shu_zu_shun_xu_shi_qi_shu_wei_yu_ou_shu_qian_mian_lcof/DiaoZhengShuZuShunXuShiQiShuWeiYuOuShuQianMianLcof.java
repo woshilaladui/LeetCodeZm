@@ -10,41 +10,58 @@ public class DiaoZhengShuZuShunXuShiQiShuWeiYuOuShuQianMianLcof {
 
     public static int[] exchange(int[] nums) {
 
-        int left = 0, right = 0;
+        int left = 0, right = nums.length - 1;
 
+        while (left < right) {
+            //left指向从前往后找偶数
+            while (left < right && nums[left] % 2 != 0)
+                left++;
+            //right指向从后往前扫描找到奇数
+            while (left < right && nums[right] %2 == 0)
+                right--;
 
-        while ( right < nums.length-1) {
-            //找到第一个偶数位置
-            while (nums[left] % 2 != 0 && left < nums.length-1) {
-                if(left == right){
-                    left++;
-                    right++;
-                }else {
-                    left++;
-                }
-
+            if(left < right){
+                int temp = nums[left];
+                nums[left] = nums[right];
+                nums[right] = temp;
             }
-
-            //找到第一个奇数位置
-            while (nums[right] % 2 == 0 && right < nums.length - 1) {
-                right++;
-            }
-
-            int temp = nums[left];
-            nums[left] = nums[right];
-            nums[right] = temp;
-
         }
 
-//        for (int num : nums) {
-//            System.out.print(num + " ");
+//        int left = 0, right = 0;
+//
+//
+//        while ( right < nums.length-1) {
+//            //找到第一个偶数位置
+//            while (nums[left] % 2 != 0 && left < nums.length-1) {
+//                if(left == right){
+//                    left++;
+//                    right++;
+//                }else {
+//                    left++;
+//                }
+//
+//            }
+//
+//            //找到第一个奇数位置
+//            while (nums[right] % 2 == 0 && right < nums.length - 1) {
+//                right++;
+//            }
+//
+//            int temp = nums[left];
+//            nums[left] = nums[right];
+//            nums[right] = temp;
+//
 //        }
+//
+////        for (int num : nums) {
+////            System.out.print(num + " ");
+////        }
 
         return nums;
     }
 
     public static void main(String[] args) {
-        int[] nums = new int[]{2,16,3,5,13,1,16,1,12,18,11,8,11,11,5,1};
+        int[] nums = new int[]{2, 16, 3, 5, 13, 1, 16, 1, 12, 18, 11, 8, 11, 11, 5, 1};
         //[2,16,3,5,13,1,16,1,12,18,11,8,11,11,5,1]
 
         exchange(nums);

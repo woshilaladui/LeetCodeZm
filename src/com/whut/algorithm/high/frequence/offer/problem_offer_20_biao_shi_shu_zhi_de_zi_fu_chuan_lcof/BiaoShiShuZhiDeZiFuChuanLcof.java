@@ -1,33 +1,26 @@
-package com.whut.algorithm.high.frequence.automata.problem65_valid_number;
+package com.whut.algorithm.high.frequence.offer.problem_offer_20_biao_shi_shu_zhi_de_zi_fu_chuan_lcof;
 
-import org.omg.PortableServer.POA;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @author Administrator
  * @version 1.0.0
- * @date 2021/3/15 19:31
+ * @date 2021/7/5 15:05
  * @desription
  */
-public class ValidNumber {
-
+public class BiaoShiShuZhiDeZiFuChuanLcof {
 
     public static boolean isNumber(String s) {
 
         Map<State, Map<CharType, State>> transfer = new HashMap<>();
 
-        //初始状态
+        //初始状态/
         Map<CharType, State> startMap = new HashMap<>();
         startMap.put(CharType.CHAR_SIGN, State.STATE_INT_SIGN);
         startMap.put(CharType.CHAR_NUMBER, State.STATE_INTEGER);
         startMap.put(CharType.CHAR_POINT, State.STATE_POINT_WHITOUT_INT);
+        startMap.put(CharType.CHAR_BLANK,State.STATE_START);
         transfer.put(State.STATE_START, startMap);
 
         //符号状态
@@ -41,12 +34,14 @@ public class ValidNumber {
         intMap.put(CharType.CHAR_NUMBER, State.STATE_INTEGER);
         intMap.put(CharType.CHAR_POINT, State.STATE_POINT);
         intMap.put(CharType.CHAR_EXP, State.STATE_EXP);
+        intMap.put(CharType.CHAR_BLANK,State.STATE_TAIL_BLANK);
         transfer.put(State.STATE_INTEGER, intMap);
 
         //小数点左边有数字部分
         Map<CharType, State> pointMap = new HashMap<>();
         pointMap.put(CharType.CHAR_NUMBER, State.STATE_FRACTION);
         pointMap.put(CharType.CHAR_EXP, State.STATE_EXP);
+        pointMap.put(CharType.CHAR_BLANK,State.STATE_TAIL_BLANK);
         transfer.put(State.STATE_POINT, pointMap);
 
         //小数点左边无数字
@@ -58,6 +53,7 @@ public class ValidNumber {
         Map<CharType, State> fractionMap = new HashMap<>();
         fractionMap.put(CharType.CHAR_NUMBER, State.STATE_FRACTION);
         fractionMap.put(CharType.CHAR_EXP, State.STATE_EXP);
+        fractionMap.put(CharType.CHAR_BLANK,State.STATE_TAIL_BLANK);
         transfer.put(State.STATE_FRACTION, fractionMap);
 
         //字符E部分
@@ -74,7 +70,13 @@ public class ValidNumber {
         //指数部分
         Map<CharType, State> expNumberMap = new HashMap<>();
         expNumberMap.put(CharType.CHAR_NUMBER, State.STATE_EXP_NUMBER);
+        expNumberMap.put(CharType.CHAR_BLANK,State.STATE_TAIL_BLANK);
         transfer.put(State.STATE_EXP_NUMBER, expNumberMap);
+
+        Map<CharType,State> tailBlankMap = new HashMap<>();
+        tailBlankMap.put(CharType.CHAR_BLANK,State.STATE_TAIL_BLANK);
+        transfer.put(State.STATE_TAIL_BLANK,tailBlankMap);
+
 
         int n = s.length();
 
@@ -96,7 +98,8 @@ public class ValidNumber {
         return state == State.STATE_INTEGER ||
                 state == State.STATE_POINT ||
                 state == State.STATE_FRACTION ||
-                state == State.STATE_EXP_NUMBER;
+                state == State.STATE_EXP_NUMBER||
+                state == State.STATE_TAIL_BLANK;
 
     }
 
@@ -110,6 +113,8 @@ public class ValidNumber {
             return CharType.CHAR_POINT;
         else if (c == '+' || c == '-')
             return CharType.CHAR_SIGN;
+        else if(c == ' ')
+            return CharType.CHAR_BLANK;
         else
             return CharType.CHAR_ILLEGAL;
     }
@@ -122,6 +127,7 @@ public class ValidNumber {
         CHAR_POINT,
         CHAR_EXP,
         CHAR_SIGN,
+        CHAR_BLANK,
         CHAR_ILLEGAL
     }
 
@@ -143,61 +149,12 @@ public class ValidNumber {
         STATE_EXP_SIGN,
         //指数部分
         STATE_EXP_NUMBER,
+        //末尾空格
+        STATE_TAIL_BLANK,
         STATE_END
     }
 
-
-    public static void main(String[] args) throws InterruptedException {
-        System.out.println(isNumber(""));
-
-        Long time1 = System.currentTimeMillis() ;
-
-        //TimeUnit.SECONDS.sleep(10);
-
-        Long time2 = System.currentTimeMillis()  + 1000*60;
-
-        Date date2 = new Date(time2);
-        Date date1 = new Date(time1);
-
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-
-        System.out.println(time1);
-        System.out.println(time2);
-        System.out.println((time2 - time1));
-
-        System.out.println("----------------------------");
-        System.out.println(sdf.format(date1));
-        System.out.println(sdf.format(date2));
-
-        ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(
-                5,
-                10,
-                1,
-                TimeUnit.SECONDS,
-                new ArrayBlockingQueue<>(10),
-                new ThreadPoolExecutor.CallerRunsPolicy()
-        );
-
-        threadPoolExecutor.submit(() -> {
-            for(int i =0 ;i<10;i++){
-                try {
-                    TimeUnit.SECONDS.sleep(1);
-                    System.out.println(i);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-
-            }
-        }).start();
-
-
-
-        threadPoolExecutor.shutdown();
+    public static void main(String[] args) {
+        System.out.println(isNumber("1 "));
     }
 }
