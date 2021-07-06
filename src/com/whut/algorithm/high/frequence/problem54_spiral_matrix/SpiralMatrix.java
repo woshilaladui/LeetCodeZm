@@ -1,4 +1,4 @@
-package com.whut.algorithm.high.frequence.common.problem54_spiral_matrix;
+package com.whut.algorithm.high.frequence.problem54_spiral_matrix;
 
 import java.util.ArrayList;
 import java.util.List;
