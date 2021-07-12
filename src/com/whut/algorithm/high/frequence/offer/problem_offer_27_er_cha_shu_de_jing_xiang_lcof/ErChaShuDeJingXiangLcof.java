@@ -45,6 +45,5 @@ public class ErChaShuDeJingXiangLcof {
     }
 
     public static void main(String[] args) {
-
     }
 }
