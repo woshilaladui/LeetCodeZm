@@ -41,6 +41,7 @@ public class FlattenBinaryTreeToLinkedList {
                     pre = pre.right;
                 }
 
+
                 pre.right = cur.right;
 
                 cur.left = null;

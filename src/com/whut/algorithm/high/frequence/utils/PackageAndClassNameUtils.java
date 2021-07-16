@@ -31,7 +31,7 @@ public class PackageAndClassNameUtils {
 
     public static void main(String[] args) {
 
-        String name = "flatten-binary-tree-to-linked-list";
+        String name = "er-cha-sou-suo-shu-yu-shuang-xiang-lian-biao-lcof";
 
         System.out.println(getPackageName(name));
         System.out.println(getClassName(name));
