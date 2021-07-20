@@ -22,16 +22,22 @@ public class SynchronizedTest1 {
         }
     }
 
-    public static void main(String[] args) {
+    public  void test2() {
+        System.out.println("asdasd");
+    }
+
+
+    public static void main(String[] args) throws InterruptedException {
         SynchronizedTest1 st = new SynchronizedTest1();
         SynchronizedTest1 st2 = new SynchronizedTest1();
         new Thread(() -> {
             System.out.println(Thread.currentThread().getName() + " test 准备进入" + new Date());
             st.test1();
         }).start();
+        Thread.sleep(1000);
         new Thread(() -> {
             System.out.println(Thread.currentThread().getName() + " test 准备进入" + new Date());
-            st2.test1();
+            st.test2();
         }).start();
 
     }

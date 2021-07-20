@@ -29,6 +29,11 @@ public class SynchronizedTest2 {
         }
     }
 
+    public  void test3() {
+        System.out.println("asdasd");
+    }
+
+
     public static void main(String[] args) {
         SynchronizedTest2 st = new SynchronizedTest2();
         new Thread(() -> {
@@ -38,7 +43,7 @@ public class SynchronizedTest2 {
         }).start();
         new Thread(() -> {
             System.out.println(Thread.currentThread().getName() + " test 准备进入" + new Date());
-            st.test2();
+            st.test3();
         }).start();
 
     }

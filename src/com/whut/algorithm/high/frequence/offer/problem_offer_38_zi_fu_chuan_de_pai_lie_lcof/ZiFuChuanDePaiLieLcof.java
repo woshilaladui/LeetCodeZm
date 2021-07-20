@@ -67,6 +67,6 @@ public class ZiFuChuanDePaiLieLcof {
         for (String s : result) {
             System.out.println(s);
         }
-        
+
     }
 }
