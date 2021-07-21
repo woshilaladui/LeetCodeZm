@@ -1,4 +1,4 @@
-package com.whut.study.thread.thread;
+package com.whut.study.thread.thread.commonConsumerAndProducer;
 
 import com.whut.study.thread.thread.commonConsumerAndProducer.Consumer;
 import com.whut.study.thread.thread.commonConsumerAndProducer.Producer;

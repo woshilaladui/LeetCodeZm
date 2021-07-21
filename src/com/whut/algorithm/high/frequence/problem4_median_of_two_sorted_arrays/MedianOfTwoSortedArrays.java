@@ -28,6 +28,7 @@ public class MedianOfTwoSortedArrays {
 
         int m = nums1.length;
         int n = nums2.length;
+        //right 为该元素右边，所以取m 不是m-1
         int left = 0, right = m;
 
         int maxLeftA;

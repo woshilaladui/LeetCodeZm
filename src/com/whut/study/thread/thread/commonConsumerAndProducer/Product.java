@@ -14,7 +14,7 @@ public class Product {
     private boolean isProduced = false;
 
     public synchronized void get() {
-        if (isProduced == false) {
+        while (isProduced == false) {
             try {
                 //仓库没有东西了，需要生产
                 wait();
@@ -29,7 +29,7 @@ public class Product {
     }
 
     public synchronized void put(String name,String color){
-        if(isProduced){
+        while (isProduced){
             try {
                 wait();
             } catch (InterruptedException e) {

@@ -84,7 +84,7 @@ public class MajorityElementII {
         MajorityElementII majorityElementII = new MajorityElementII();
 
         //[1,1,2,2,7,7,8,8,9,3,9,3,9,3,9,3,9,3,9,3,9,3,9,3,9,3,9,3,9,3,9,3,9,3,9,3,9,3]
-        List<Integer> result = majorityElementII.majorityElement(new int[]{1,1,2,2,7,7,8,8,9,3,9,3,9,3,9,3,9,3,9,3,9,3,9,3,9,3,9,3,9,3,9,3,9,3,9,3,9,3});
+        List<Integer> result = majorityElementII.majorityElement(new int[]{3,2,3});
         for (Integer integer : result) {
             System.out.println(integer);
         }
