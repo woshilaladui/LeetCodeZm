@@ -213,6 +213,7 @@ public class LinkedList {
         listNode2.next = listNode3;
         listNode3.next = null;
 
+
         System.out.println(listNode1.val);
         System.out.println(listNode1.next.val);
         System.out.println(listNode1.next.next.val);
