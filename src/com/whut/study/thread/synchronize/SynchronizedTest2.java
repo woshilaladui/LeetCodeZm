@@ -29,6 +29,32 @@ public class SynchronizedTest2 {
         }
     }
 
+    public void test5() {
+        synchronized (this) {
+            try {
+                System.out.println(Thread.currentThread().getName() + " test5 进入了同步块" + new Date());
+
+                Thread.sleep(5000);
+                System.out.println(Thread.currentThread().getName() + " test5 休眠结束" + new Date());
+
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public synchronized void test4(){
+        try {
+            System.out.println(Thread.currentThread().getName() + " test4 进入了同步块" + new Date());
+
+            Thread.sleep(5000);
+            System.out.println(Thread.currentThread().getName() + " test4 休眠结束" + new Date());
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
     public synchronized static void testN(){
         try {
             System.out.println(Thread.currentThread().getName() + " testN 进入了同步块" + new Date());
@@ -42,7 +68,16 @@ public class SynchronizedTest2 {
     }
 
     public  void test3() {
-        System.out.println("asdasd");
+
+        try {
+            System.out.println(Thread.currentThread().getName() + " test3 进入了同步块" + new Date());
+
+            Thread.sleep(5000);
+            System.out.println(Thread.currentThread().getName() + " test3 休眠结束" + new Date());
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -52,11 +87,11 @@ public class SynchronizedTest2 {
         new Thread(() -> {
             System.out.println(Thread.currentThread().getName() + " test 准备进入" + new Date());
 
-            st.testN();
+            st.test2();
         }).start();
         new Thread(() -> {
             System.out.println(Thread.currentThread().getName() + " test 准备进入" + new Date());
-            st2.testN();
+            st.test5();
         }).start();
 
     }

@@ -50,6 +50,11 @@ public class ShuZuZhongDeNiXuDuiLcof {
         int leftPairs = reversePairs(nums, low, mid, temp);
         int rightPairs = reversePairs(nums, mid + 1, high, temp);
 
+        //减少递归次数
+        if (nums[mid] <= nums[mid + 1]) {
+            return leftPairs + rightPairs;
+        }
+
         int mergePairs = merge(nums, low, mid, high, temp);
 
         return leftPairs + rightPairs + mergePairs;
@@ -68,6 +73,9 @@ public class ShuZuZhongDeNiXuDuiLcof {
      */
     private int merge(int[] nums, int low, int mid, int high, int[] temp) {
         //闭区间
+        /**
+         * 注意细节：这里的temp是传递过来的，如果每次递归生成则狠花时间
+         */
         for (int i = low; i <= high; i++)
             temp[i] = nums[i];
 

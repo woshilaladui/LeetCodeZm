@@ -14,7 +14,7 @@ public class SynchronizedTest1 {
         try {
             System.out.println(Thread.currentThread().getName() + " test1 进入了同步方法" + new Date());
 
-            Thread.sleep(5000);
+            Thread.sleep(10000);
             System.out.println(Thread.currentThread().getName() + " test1 休眠结束" + new Date());
 
         } catch (InterruptedException e) {
@@ -26,17 +26,22 @@ public class SynchronizedTest1 {
         System.out.println("asdasd");
     }
 
+    public synchronized void test3(){
+        System.out.println("test3");
+    }
+
+
 
     public static void main(String[] args) throws InterruptedException {
         SynchronizedTest1 st = new SynchronizedTest1();
         SynchronizedTest1 st2 = new SynchronizedTest1();
         new Thread(() -> {
-            System.out.println(Thread.currentThread().getName() + " test 准备进入" + new Date());
+            System.out.println(Thread.currentThread().getName() + " test1 准备进入" + new Date());
             st.test1();
         }).start();
         Thread.sleep(1000);
         new Thread(() -> {
-            System.out.println(Thread.currentThread().getName() + " test 准备进入" + new Date());
+            System.out.println(Thread.currentThread().getName() + " test1 准备进入" + new Date());
             st.test2();
         }).start();
 
