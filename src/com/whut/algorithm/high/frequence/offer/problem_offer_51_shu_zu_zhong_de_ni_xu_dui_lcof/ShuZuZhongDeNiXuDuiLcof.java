@@ -1,5 +1,10 @@
 package com.whut.algorithm.high.frequence.offer.problem_offer_51_shu_zu_zhong_de_ni_xu_dui_lcof;
 
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.concurrent.ConcurrentHashMap;
+
 /**
  * @author Administrator
  * @version 1.0.0
@@ -104,19 +109,22 @@ public class ShuZuZhongDeNiXuDuiLcof {
     }
 
     public static void main(String[] args) {
-
         //[7,5,6,4]
-        ShuZuZhongDeNiXuDuiLcof shuZuZhongDeNiXuDuiLcof = new ShuZuZhongDeNiXuDuiLcof();
+//        ShuZuZhongDeNiXuDuiLcof shuZuZhongDeNiXuDuiLcof = new ShuZuZhongDeNiXuDuiLcof();
+//
+//        int[] nums = new int[]{7, 5, 6, 4};
+//
+//        int result = shuZuZhongDeNiXuDuiLcof.reversePairs(nums);
+//
+//        for (int num : nums) {
+//            System.out.print(num + " ");
+//        }
+//        System.out.println();
+//
+//        System.out.println(result);
 
-        int[] nums = new int[]{7, 5, 6, 4};
+        HashMap<Integer,Integer> map = new HashMap<>();
 
-        int result = shuZuZhongDeNiXuDuiLcof.reversePairs(nums);
-
-        for (int num : nums) {
-            System.out.print(num + " ");
-        }
-        System.out.println();
-
-        System.out.println(result);
+        map.put(null,1);
     }
 }
