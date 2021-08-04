@@ -8,6 +8,12 @@ package com.whut.algorithm.high.frequence.sort;
  */
 public class MergeSort {
 
+    /**
+     * O(nlogn)
+     *
+     * 稳定排序
+     */
+
     private static int result = 0;
 
     /**

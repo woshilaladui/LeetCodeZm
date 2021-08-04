@@ -12,19 +12,20 @@ import java.util.LinkedHashSet;
 public class LFUCache {
 
     //key对value的映射
-    HashMap<Integer, Integer> keyToVal;
+    private HashMap<Integer, Integer> keyToVal;
 
     //key对频率的映射
-    HashMap<Integer, Integer> keyToFreq;
+    private HashMap<Integer, Integer> keyToFreq;
 
     //频率对keys的映射，key为集合
+    //一个freq 对应很多Node节点
     //LinkedHashSet 可以快速删除key，时间复杂度为O(1)
-    HashMap<Integer, LinkedHashSet<Integer>> freqToKeys;
+    private HashMap<Integer, LinkedHashSet<Integer>> freqToKeys;
 
-    int capacity;
+    private int capacity;
 
     //最小访问频次
-    int minFreq;
+    private int minFreq;
 
     public LFUCache(int capacity) {
         keyToVal = new HashMap<>();
@@ -80,6 +81,7 @@ public class LFUCache {
     private void removeMinFreqKey() {
         LinkedHashSet<Integer> keyList = freqToKeys.get(this.minFreq);
 
+        //像LRU删除头头节点（头结点最先插入）
         int deletedKey = keyList.iterator().next();
 
         //更新FK表

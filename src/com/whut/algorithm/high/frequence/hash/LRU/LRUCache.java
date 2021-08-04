@@ -13,7 +13,7 @@ public class LRUCache {
 
     public int capacity;
 
-    //双向循环链表，每次插入再最前面插入
+    //双向链表，每次插入再最前面插入
     private LinkedHashMap<Integer, Integer> cache = new LinkedHashMap<>();
 
     public LRUCache(int capacity) {
@@ -52,7 +52,7 @@ public class LRUCache {
     }
 
     public void makeRecently(int key) {
-        //删除再删除
+        //删除再插入
         int value = cache.get(key);
         cache.remove(key);
         cache.put(key, value);

@@ -8,6 +8,14 @@ package com.whut.algorithm.high.frequence.sort;
  */
 public class SelectSort {
 
+    /**
+     *
+     * O(n2)
+     *
+     * 不稳定排序
+     *
+     * @param A
+     */
     public static void selectSort(int[] A) {
         int n = A.length;
 

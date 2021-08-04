@@ -8,6 +8,15 @@ package com.whut.algorithm.high.frequence.sort;
  */
 public class InsertSort {
 
+
+    /**
+     * O(n2)
+     *
+     * 稳定排休
+     *
+     * @param A
+     * @param n
+     */
     public static void insertSort(int[] A, int n) {
         int i, j;
         for (i = 1; i < n; i++) {

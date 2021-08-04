@@ -1,5 +1,7 @@
 package com.whut.algorithm.high.frequence.sort;
 
+import java.util.Random;
+
 /**
  * @author Administrator
  * @version 1.0.0
@@ -49,5 +51,6 @@ public class QuicklySort {
         for (int i : A) {
             System.out.print(i+" ");
         }
+
     }
 }

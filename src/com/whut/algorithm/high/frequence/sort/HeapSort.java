@@ -10,6 +10,13 @@ package com.whut.algorithm.high.frequence.sort;
 public class HeapSort {
 
 
+    /**
+     *
+     * O(nlogn)
+     *
+     * 不稳定排序
+     *
+     */
     public static class Heap {
         public int[] elem;
         public int length;
@@ -95,5 +102,10 @@ public class HeapSort {
         heap.length = heap.elem.length;
 
         heapSort(heap);
+
+        System.out.println();
+
+        for(int i =0;i<heap.elem.length;i++)
+            System.out.print(heap.elem[i]+" ");
     }
 }

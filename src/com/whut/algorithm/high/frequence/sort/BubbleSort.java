@@ -8,6 +8,14 @@ package com.whut.algorithm.high.frequence.sort;
  */
 public class BubbleSort {
 
+    /**
+     * O(n2)
+     *
+     * 稳定排序
+     *
+     * @param A
+     * @param n
+     */
     public static void bubbleSort(int[] A, int n) {
         boolean flag;
         for (int i = 0; i < n - 1; i++) {
