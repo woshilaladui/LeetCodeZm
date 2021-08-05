@@ -166,11 +166,11 @@ public class TrainSort {
             //子节点满足小顶堆概念
             if (nums[j] > temp)
                 break;
-            else {
-                nums[j] = temp;
 
-                i = j;
-            }
+            nums[i] = nums[j];
+
+            i = j;
+
 
         }
         nums[i] = temp;
@@ -189,13 +189,13 @@ public class TrainSort {
 
         for (int i = nums.length - 1; i >= 0; i--) {
             //每次把第一个元素挪到最后取
-           // list.add(nums[0]);
+            // list.add(nums[0]);
             System.out.print(nums[0] + " ");
-            int temp = nums[0];
-            nums[0] = nums[i];
-            nums[i] = temp;
+            int temp = nums[i];
+            nums[i] = nums[0];
+            nums[0] = temp;
 
-            adjust(nums,0,i-1);
+            adjust(nums, 0, i - 1);
         }
 
         return list.toArray(new Integer[0]);
@@ -205,7 +205,7 @@ public class TrainSort {
         int[] A = new int[]{53, 17, 78, 4, 45, 65, 87, 32};
         //mergeSort(A);
 
-        Integer []result = heapSort(A);
+        Integer[] result = heapSort(A);
 
         System.out.println();
 
