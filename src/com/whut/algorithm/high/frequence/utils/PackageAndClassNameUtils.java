@@ -31,7 +31,7 @@ public class PackageAndClassNameUtils {
 
     public static void main(String[] args) {
 
-        String name = "que-shi-de-shu-zi-lcof";
+        String name = "maximum-product-subarray";
 
         System.out.println(getPackageName(name));
         System.out.println(getClassName(name));
