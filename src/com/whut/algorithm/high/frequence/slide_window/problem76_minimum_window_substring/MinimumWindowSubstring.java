@@ -1,4 +1,4 @@
-package com.whut.algorithm.slide_window.problem76_minimum_window_substring;
+package com.whut.algorithm.high.frequence.slide_window.problem76_minimum_window_substring;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -82,10 +82,14 @@ public class MinimumWindowSubstring {
 
     public static void main(String[] args) {
 
-        String s = "bbaa";
-        String t = "aba";
+//        String s = "bbaa";
+//        String t = "aba";
+//
+//        System.out.println(minWindow(s, t));
 
-        System.out.println(minWindow(s, t));
-
+        int l = 1;
+        int r = 3;
+        int sum = (l + r) * (r - l + 1) / 2;
+        System.out.println(sum);
     }
 }

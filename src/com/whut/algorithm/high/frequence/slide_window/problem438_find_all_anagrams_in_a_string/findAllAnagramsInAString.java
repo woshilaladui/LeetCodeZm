@@ -1,4 +1,4 @@
-package com.whut.algorithm.slide_window.problem438_find_all_anagrams_in_a_string;
+package com.whut.algorithm.high.frequence.slide_window.problem438_find_all_anagrams_in_a_string;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -2,6 +2,9 @@ package com.whut.study.design.pattern.observer;
 
 import sun.reflect.generics.tree.Wildcard;
 
+import java.util.Arrays;
+import java.util.Comparator;
+
 /**
  * @author Administrator
  * @version 1.0.0
@@ -23,6 +26,7 @@ public class Client {
 
         //发布
         subscriptionSubject.notify("苟富贵的专栏更新了");
+
 
     }
 }

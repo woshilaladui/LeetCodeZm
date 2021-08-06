@@ -1,4 +1,4 @@
-package com.whut.algorithm.slide_window.problem48_zui_chang_bu_han_zhong_fu_zi_fu_de_zi_zi_fu_chuan_lcof;
+package com.whut.algorithm.high.frequence.slide_window.problem48_zui_chang_bu_han_zhong_fu_zi_fu_de_zi_zi_fu_chuan_lcof;
 
 import java.util.HashMap;
 import java.util.Map;
