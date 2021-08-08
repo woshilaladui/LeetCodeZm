@@ -31,7 +31,7 @@ public class PackageAndClassNameUtils {
 
     public static void main(String[] args) {
 
-        String name = "nge-tou-zi-de-dian-shu-lcof";
+        String name = "yuan-quan-zhong-zui-hou-sheng-xia-de-shu-zi-lcof";
 
         System.out.println(getPackageName(name));
         System.out.println(getClassName(name));
