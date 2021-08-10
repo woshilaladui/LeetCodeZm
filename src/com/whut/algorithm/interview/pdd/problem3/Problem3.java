@@ -1,4 +1,4 @@
-package com.whut.algorithm.pdd.problem3;
+package com.whut.algorithm.interview.pdd.problem3;
 
 import java.util.LinkedList;
 import java.util.List;

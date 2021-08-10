@@ -1,4 +1,4 @@
-package com.whut.algorithm.pdd.problem4;
+package com.whut.algorithm.interview.pdd.problem4;
 
 import java.util.HashMap;
 import java.util.Map;
