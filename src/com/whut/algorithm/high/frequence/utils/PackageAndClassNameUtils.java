@@ -31,7 +31,7 @@ public class PackageAndClassNameUtils {
 
     public static void main(String[] args) {
 
-        String name = "gu-piao-de-zui-da-li-run-lcof";
+        String name = "remove-duplicate-letters";
 
         System.out.println(getPackageName(name));
         System.out.println(getClassName(name));
