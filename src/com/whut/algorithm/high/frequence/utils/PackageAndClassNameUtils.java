@@ -31,7 +31,7 @@ public class PackageAndClassNameUtils {
 
     public static void main(String[] args) {
 
-        String name = "best-time-to-buy-and-sell-stock-iii";
+        String name = "course-schedule-ii";
 
         System.out.println(getPackageName(name));
         System.out.println(getClassName(name));

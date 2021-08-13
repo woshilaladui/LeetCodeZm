@@ -16,6 +16,7 @@ public class IOClient {
         new Thread(() -> {
             try {
                 Socket socket = new Socket("127.0.0.1", 3333);
+
                 while (true) {
                     try {
                         socket.getOutputStream().write((new Date() + ": hello world").getBytes());

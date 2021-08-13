@@ -74,7 +74,7 @@ public class NIOClientThread extends NIOBase implements Runnable{
         if (socketChannel.isConnectionPending()){
             socketChannel.finishConnect();
         }
-        socketChannel.configureBlocking(false);//将连接设置为非阻塞
+        //socketChannel.configureBlocking(false);//将连接设置为非阻塞
         //step3. 连接后,可以给服务端发送消息
         socketChannel.write(ByteBuffer.wrap(new String("client send some data to server").getBytes()));
 
