@@ -1,5 +1,8 @@
 package com.whut.study.thread.thread.test;
 
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -16,21 +19,35 @@ public class PrintTest {
         Condition a = awaitSignal.newCondition();
         Condition b = awaitSignal.newCondition();
         Condition c = awaitSignal.newCondition();
-        // 开启三个线程
-        Thread threadA = new Thread(() -> {
+
+        ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(
+                3,
+                6,
+                60L,
+                TimeUnit.SECONDS,
+                new ArrayBlockingQueue<>(10),
+                new ThreadPoolExecutor.CallerRunsPolicy()
+        );
+
+        threadPoolExecutor.execute(() -> {
             awaitSignal.print("a", a, b);
         });
+        // 开启三个线程
+//        Thread threadA = new Thread(() -> {
+//            awaitSignal.print("a", a, b);
+//        });
 
-        threadA.setName("ThreadA");
-
-        threadA.start();
+//        threadA.setName("ThreadA");
+//
+//        threadA.start();
 
         Thread threadB = new Thread(() -> {
             awaitSignal.print("b", b, c);
         });
 
         threadB.setName("threadB");
-        threadB.start();
+        threadPoolExecutor.execute(threadB);
+        //threadB.start();
 
 
         Thread threadC = new Thread(() -> {
@@ -39,6 +56,8 @@ public class PrintTest {
 
         threadC.setName("threadC");
         threadC.start();
+
+
 
         try {
             Thread.sleep(1000);
@@ -52,6 +71,12 @@ public class PrintTest {
         } finally {
             awaitSignal.unlock();
         }
+
+        //终止线程池
+        threadPoolExecutor.shutdown();
+        while (!threadPoolExecutor.isTerminated()) {
+        }
+        System.out.println("Finished all threads");
     }
 
 
@@ -79,6 +104,7 @@ class AwaitSignal extends ReentrantLock {
             try {
                 current.await();
                 System.out.print(print);
+                System.out.println(Thread.currentThread().getName());
                 next.signal();
             } catch (InterruptedException e) {
                 e.printStackTrace();

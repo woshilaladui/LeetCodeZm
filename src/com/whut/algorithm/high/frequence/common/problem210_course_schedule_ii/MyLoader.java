@@ -13,7 +13,7 @@ public class MyLoader extends ClassLoader {
     @Override
     protected Class<?> findClass(String name) throws ClassNotFoundException {
 
-        ServiceLoader
+
 
         return super.findClass(name);
     }

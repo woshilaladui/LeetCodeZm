@@ -1,6 +1,6 @@
 package com.whut.algorithm.high.frequence.offer.problem_offer_08_yong_liang_ge_zhan_shi_xian_dui_lie_lcof;
 
-import com.whut.study.thread.test.A;
+
 
 import java.util.ArrayDeque;
 import java.util.Deque;

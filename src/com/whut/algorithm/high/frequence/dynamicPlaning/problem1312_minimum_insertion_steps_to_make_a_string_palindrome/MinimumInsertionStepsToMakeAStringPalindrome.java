@@ -8,6 +8,44 @@ package com.whut.algorithm.high.frequence.dynamicPlaning.problem1312_minimum_ins
  */
 public class MinimumInsertionStepsToMakeAStringPalindrome {
 
+    /**
+     * 在此基础上改进题目：要求只能在字符串后面加入字符使得其可以成为回文串
+     *
+     * @param s
+     * @return
+     */
+    private static int minInsertions1(String s) {
+
+        int min = s.length() - 1;
+
+        //注意看以当前中心的回文串能否到达最后
+        for (int i = s.length() - 1; i >= (s.length() - 1) / 2; i--) {
+
+            int len1 = expandAroundCenter(s, i, i);
+            int len2 = expandAroundCenter(s, i, i + 1);
+
+            //判断以当前一个结点为中心能否到达最后结点
+            if (len1 / 2 + i + 1 == s.length()) {
+                min = Math.min(len1,s.length()-len1);
+            }
+
+            if(len2 /2 + i + 1 == s.length()){
+                min = Math.min(len2,s.length()-len2);
+            }
+
+        }
+
+        return min;
+    }
+
+    private static int expandAroundCenter(String s, int left, int right) {
+        while ((left >= 0 && right < s.length()) && s.charAt(left) == s.charAt(right)) {
+            left--;
+            right++;
+        }
+        return right - left - 1;
+    }
+
     private static int minInsertions(String s) {
         int n = s.length();
 

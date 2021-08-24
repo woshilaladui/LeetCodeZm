@@ -1,8 +1,6 @@
 package com.whut.algorithm.high.frequence.tree.problem94_binary_tree_inorder_traversal;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * @author Administrator
@@ -53,17 +51,18 @@ public class BinaryTreeInorderTraversal {
     }
 
     public static void main(String[] args) {
-        TreeNode treeNode1 = new TreeNode(1);
-        TreeNode treeNode2 = new TreeNode(2);
-        TreeNode treeNode3 = new TreeNode(3);
-
-        treeNode1.right = treeNode2;
-        treeNode2.left = treeNode3;
-
-        List<Integer> result = inorderTraversal(treeNode1);
-
-        for (Integer integer : result) {
-            System.out.print(integer);
-        }
+//        TreeNode treeNode1 = new TreeNode(1);
+//        TreeNode treeNode2 = new TreeNode(2);
+//        TreeNode treeNode3 = new TreeNode(3);
+//
+//        treeNode1.right = treeNode2;
+//        treeNode2.left = treeNode3;
+//
+//        List<Integer> result = inorderTraversal(treeNode1);
+//
+//        for (Integer integer : result) {
+//            System.out.print(integer);
+//        }
+        System.out.println("asd");
     }
 }

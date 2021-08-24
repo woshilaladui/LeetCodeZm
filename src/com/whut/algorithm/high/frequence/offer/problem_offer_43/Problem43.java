@@ -12,20 +12,22 @@ import java.util.concurrent.TimeUnit;
 public class Problem43 {
 
     public static void main(String[] args) {
-        Date date = new Date();
-
-        try {
-            TimeUnit.SECONDS.sleep(10);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        Date date1 = new Date();
-
-        System.out.println((date1.getTime()-date.getTime())/1000 );
+        System.out.println(123%10);
+//        Date date = new Date();
+//
+//        try {
+//            TimeUnit.SECONDS.sleep(10);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//
+//        Date date1 = new Date();
+//
+//        System.out.println((date1.getTime()-date.getTime())/1000 );
+        System.out.println(countDigitOne(123));
     }
 
-    public int countDigitOne(int n) {
+    public static int countDigitOne(int n) {
         //高位
         int high = n;
         //低位

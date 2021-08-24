@@ -26,9 +26,9 @@ public class ConTest2 {
         producer.start();
         consumer.start();
         //让线程停掉
-        Thread.sleep(0);
-        producer.interrupt();
-        consumer.interrupt();
+//        Thread.sleep(0);
+//        producer.interrupt();
+//        consumer.interrupt();
 
     }
 
