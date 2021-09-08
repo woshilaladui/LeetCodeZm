@@ -24,9 +24,7 @@ public class ThreadCo2 {
         for (int i = 0; i < COUNT; i++) {
             new Thread(new Staff(i, cb)).start();
         }
-        synchronized (ThreadCo2.class) {
-            ThreadCo2.class.wait();
-        }
+
     }
 
 

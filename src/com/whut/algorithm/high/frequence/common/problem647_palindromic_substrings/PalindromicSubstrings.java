@@ -12,9 +12,6 @@ public class PalindromicSubstrings {
 
     private static int count = 0;
 
-    public int countSubstrings(String s) {
-        return 0;
-    }
 
     private static boolean isPalindromic(String s) {
         int left = 0, right = s.length() - 1;
@@ -42,10 +39,25 @@ public class PalindromicSubstrings {
         for (int i = start; i < s.length(); i++) {
 
 
-
         }
 
 
+    }
+
+    public int countSubstrings(String s) {
+        int num = 0;
+        int n = s.length();
+        char []arr = s.toCharArray();
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j <= 1; j++) {
+                int l = i;
+                int r = i + j;
+                while (l >= 0 && r < n && arr[l--] == arr[r++])
+                    num++;
+            }
+        }
+        return num;
     }
 
     public static void main(String[] args) {

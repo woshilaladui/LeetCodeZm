@@ -1,4 +1,4 @@
-//package com.whut.interview.tencent.problem1;
+//package com.whut.interview.tencent.problem3;
 //
 //import java.util.ArrayList;
 //import java.util.List;
@@ -58,7 +58,7 @@
 //
 //    }
 //}
-//package com.whut.interview.tencent.problem1;
+//package com.whut.interview.tencent.problem3;
 //
 //import java.util.ArrayList;
 //import java.util.List;

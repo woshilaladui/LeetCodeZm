@@ -28,9 +28,9 @@ public class ThreadCo1 {
         for (int i = 0; i < COUNT; i++) {
             new Thread(new Student(i, cdl)).start();
         }
-        synchronized (ThreadCo1.class) {
-            ThreadCo1.class.wait();
-        }
+//        synchronized (ThreadCo1.class) {
+//            ThreadCo1.class.wait();
+//        }
     }
 
     static CountDownLatch cdl = new CountDownLatch(COUNT);

@@ -31,7 +31,7 @@ public class PackageAndClassNameUtils {
 
     public static void main(String[] args) {
 
-        String name = "sort-colors";
+        String name = "shortest-unsorted-continuous-subarray";
 
         System.out.println(getPackageName(name));
         System.out.println(getClassName(name));

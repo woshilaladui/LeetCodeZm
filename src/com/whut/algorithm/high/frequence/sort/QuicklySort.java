@@ -1,6 +1,6 @@
 package com.whut.algorithm.high.frequence.sort;
 
-import java.util.Random;
+import java.util.*;
 
 /**
  * @author Administrator
@@ -44,13 +44,16 @@ public class QuicklySort {
     }
 
     public static void main(String[] args) {
-        int []A = new int[]{53,17,78,4,45,65,87,32};
+       // int [][][]a = new int[Integer.MAX_VALUE][Integer.MAX_VALUE][Integer.MAX_VALUE];
+//        int []A = new int[]{53,17,78,4,45,65,87,32};
+//
+//        quicklySort(A,0,A.length-1);
+//
+//        for (int i : A) {
+//            System.out.print(i+" ");
+//        }
+        String b ="aerrrrrrrrgfffffffffffffaerrrrrrrrgffffffaerrrrrrrrgffffffaerrrrrrrrgaerrrrrrrrgffffffffffffffffffffffffffffdddddddddddddddddbffffffffffffffffffffffffffffdddddddddddddddddbffffffffffffffffffffffdddddddddddddddddbffffffffffffffffffffffdddddddddddddddddbfffffffffffffffdddddddddddddddddb";
 
-        quicklySort(A,0,A.length-1);
-
-        for (int i : A) {
-            System.out.print(i+" ");
-        }
-
+        System.out.println(b.hashCode());
     }
 }
