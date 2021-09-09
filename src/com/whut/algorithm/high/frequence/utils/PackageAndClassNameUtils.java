@@ -31,7 +31,7 @@ public class PackageAndClassNameUtils {
 
     public static void main(String[] args) {
 
-        String name = "path-sum-iii";
+        String name = "find-all-numbers-disappeared-in-an-array";
 
         System.out.println(getPackageName(name));
         System.out.println(getClassName(name));

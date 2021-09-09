@@ -1,5 +1,6 @@
 package com.whut.algorithm.twoSum;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -91,8 +92,8 @@ public class NSum {
 
     public static List<List<Integer>> combinationSum3(int k, int n) {
 
-        int []nums = new int[]{1,2,3,4,5,6,7,8,9};
-
+        int []nums = new int[]{-1,0,1,2,-1,-4};
+        Arrays.sort(nums);
 //        List<List<Integer>> result = nSumTarget(nums, 3, 0, 7);
 //
 //        for (List<Integer> list : result) {
@@ -105,7 +106,7 @@ public class NSum {
     }
 
     public static void main(String[] args) {
-        List<List<Integer>> result = combinationSum3(3,7);
+        List<List<Integer>> result = combinationSum3(3,0);
 
         for (List<Integer> list : result) {
             for (Integer integer : list) {

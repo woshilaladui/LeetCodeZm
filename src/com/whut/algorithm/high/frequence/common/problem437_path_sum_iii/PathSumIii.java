@@ -1,8 +1,6 @@
 package com.whut.algorithm.high.frequence.common.problem437_path_sum_iii;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author Administrator
@@ -32,30 +30,35 @@ public class PathSumIii {
     }
 
     public int pathSum(TreeNode root, int targetSum) {
-        List<List<Integer>> result = new LinkedList<>();
-        List<Integer> path = new LinkedList<>();
-        backTrack(result,path,targetSum,root);
-        return result.size();
+        Map<Integer, Integer> prefixMap = new HashMap<>();
+        prefixMap.put(0, 1);
+        return backTrack(root,prefixMap,targetSum,0);
     }
 
-    private static void backTrack(
-            List<List<Integer>> result,
-            List<Integer> path,
-            int sum,
-            TreeNode root
+    private int backTrack(
+            TreeNode node,
+            Map<Integer, Integer> prefixMap,
+            int target,
+            int curSum
     ) {
-        if (root == null)
-            return;
-        if (root.left == null && root.right == null && root.val == sum) {
-            List<Integer> list = new LinkedList<>(path);
-            path.add(root.val);
-            result.add(list);
-            return;
+        if (node == null) {
+            return 0;
         }
+        //本层结果
+        int res = 0;
+        curSum += node.val;
 
-        path.add(root.val);
-        backTrack(result,path,sum - root.val,root.left);
-        backTrack(result,path,sum - root.val,root.right);
-        path.remove(path.size()-1);
+        res += prefixMap.getOrDefault(curSum - target, 0);
+        //保存当前结点的前缀和
+        prefixMap.put(curSum, prefixMap.getOrDefault(curSum, 0) + 1);
+
+        res += backTrack(node.left, prefixMap, target, curSum);
+        res += backTrack(node.right, prefixMap, target, curSum);
+
+        //递归结束清除上一层的前缀和
+        prefixMap.put(curSum, prefixMap.get(curSum) - 1);
+        return res;
+
     }
+
 }
