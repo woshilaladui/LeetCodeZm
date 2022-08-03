@@ -16,8 +16,6 @@ public class Traverse {
      * @param root
      */
     private static void nonRecursionPostOrderTraverse2(TreeNode root) {
-
-
         if (root == null)
             return;
         Map<TreeNode, Integer> tag = new HashMap<>();
@@ -31,13 +29,11 @@ public class Traverse {
                 tag.put(root, 0);
                 root = root.left;
             }
-
             //右分支被访问过了
             while (!stack.empty() && tag.get(stack.peek()) == 1) {
                 System.out.println(stack.peek().val);
                 stack.pop();
             }
-
             //沿着右分支
             if (!stack.empty()) {
                 //标记该结点左结点访问过了
@@ -47,15 +43,12 @@ public class Traverse {
         }
     }
 
-    //双栈
-
     /**
      * 后续遍历非递归
-     *
+     * 双栈
      * @param tree
      */
     private static void nonRecursionPostOrderTraverse(TreeNode tree) {
-
         if (tree == null)
             return;
         else {
@@ -93,15 +86,11 @@ public class Traverse {
      * @param tree
      */
     private static void nonRecursionInOrderTraverse(TreeNode tree) {
-
         if (tree == null)
             return;
         else {
-
             Stack<TreeNode> stack = new Stack<>();
-
             TreeNode preTree = null;
-
             //LDR
             while (!stack.empty() || tree != null) {
                 if (tree != null) {
@@ -118,9 +107,7 @@ public class Traverse {
                     tree = tree.right;
                 }
             }
-
         }
-
     }
 
     /**
@@ -129,15 +116,12 @@ public class Traverse {
      * @param tree
      */
     private static void nonRecursionPreOrderTraverse(TreeNode tree) {
-
         if (tree == null)
             return;
-
         else {
             Stack<TreeNode> stack = new Stack<>();
             //根节点入栈
             stack.push(tree);
-
             //当栈不空时
             while (!stack.empty()) {
                 //DLR
@@ -145,19 +129,14 @@ public class Traverse {
                 tree = stack.pop();
                 if(tree != null)
                     System.out.println(tree.val);
-
                 //先将右子树入栈，再将左子树入栈
                 if (tree != null && tree.right != null)
                     stack.push(tree.right);
                 if (tree != null && tree.left != null)
                     stack.push(tree.left);
-
             }
-
         }
-
     }
-
     //Traverse
 
     /**
@@ -166,13 +145,11 @@ public class Traverse {
      * @param tree
      */
     private static void nonRecursionPreOrderTraverse2(TreeNode tree) {
-
         if (tree == null)
             return;
         else {
             Stack<TreeNode> stack = new Stack<>();
             while (!stack.empty() || tree != null) {
-
                 //DLR
                 if (tree != null) {
                     //先访问根节点
@@ -185,10 +162,8 @@ public class Traverse {
                     tree = stack.pop();
                     tree = tree.right;
                 }
-
             }
         }
-
     }
 
     /**

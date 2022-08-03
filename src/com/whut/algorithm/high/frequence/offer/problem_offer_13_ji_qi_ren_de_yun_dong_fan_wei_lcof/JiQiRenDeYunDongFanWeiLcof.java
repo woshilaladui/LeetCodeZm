@@ -3,6 +3,8 @@ package com.whut.algorithm.high.frequence.offer.problem_offer_13_ji_qi_ren_de_yu
 import com.whut.study.io.netty.chat.Test;
 
 import java.util.*;
+import java.util.concurrent.CyclicBarrier;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * @author Administrator

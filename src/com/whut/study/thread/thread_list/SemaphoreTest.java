@@ -18,13 +18,9 @@ public class SemaphoreTest {
     private static int count = 20;
 
     public static void main(String[] args) {
-
-
         ExecutorService executorService = Executors.newFixedThreadPool(count);
-
         //指定最多只能有五个线程同时执行
         Semaphore semaphore = new Semaphore(5);
-
         Random random = new Random();
         for (int i = 0; i < count; i++) {
             final int no = i;
@@ -45,8 +41,6 @@ public class SemaphoreTest {
                 }
             });
         }
-
         executorService.shutdown();
-
     }
 }

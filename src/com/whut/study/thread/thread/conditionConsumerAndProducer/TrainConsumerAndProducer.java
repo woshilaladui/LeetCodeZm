@@ -36,10 +36,8 @@ public class TrainConsumerAndProducer {
         public void run() {
            consumer();
         }
-
         private void consumer(){
             boolean flag = true;
-
             while (flag){
                 lock.lock();
                 try {
@@ -50,9 +48,7 @@ public class TrainConsumerAndProducer {
                         }  catch (InterruptedException e){
                             flag = false;
                         }
-
                     }
-
                     notFull.signal();
                     queue.poll();
                     System.out.println("从队列取走一个元素，队列剩余"+queue.size()+"个元素");
@@ -62,16 +58,13 @@ public class TrainConsumerAndProducer {
             }
         }
     }
-
     static class Producer extends Thread{
         @Override
         public void run() {
             produce();
         }
-
         private void produce(){
             boolean flag = true;
-
             while (flag){
                 lock.lock();
                 try {
@@ -83,7 +76,6 @@ public class TrainConsumerAndProducer {
                             flag = false;
                         }
                     }
-
                     queue.offer(1);        //每次插入一个元素
                     notEmpty.signal();
                     System.out.println("向队列取中插入一个元素，队列剩余空间："+(queueSize-queue.size()));

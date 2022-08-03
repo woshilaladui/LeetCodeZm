@@ -26,36 +26,25 @@ public class ThreadCo2 {
         }
 
     }
-
-
     static CyclicBarrier cb = new CyclicBarrier(COUNT, new Singer());
-
     static class Singer implements Runnable {
-
         @Override
         public void run() {
             System.out.println("为大家唱歌。。。");
         }
-
     }
-
     static class Staff implements Runnable {
-
         CyclicBarrier cb;
         int num;
-
         Staff(int num, CyclicBarrier cb) {
             this.num = num;
             this.cb = cb;
         }
-
         @Override
         public void run() {
             System.out.println(String.format("员工(%d)出发。。。", num));
-
             doingLongTime();
             System.out.println(String.format("员工(%d)到达地点一。。。", num));
-
             try {
                 cb.await();
             } catch (Exception e) {
@@ -71,7 +60,6 @@ public class ThreadCo2 {
                 e.printStackTrace();
             }
             System.out.println(String.format("员工(%d)再出发。。。", num));
-
             doingLongTime();
             System.out.println(String.format("员工(%d)到达地点三。。。", num));
             try {
@@ -81,7 +69,6 @@ public class ThreadCo2 {
             }
             System.out.println(String.format("员工(%d)结束。。。", num));
         }
-
         private void doingLongTime() {
         }
 

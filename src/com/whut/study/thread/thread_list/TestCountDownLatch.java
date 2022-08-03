@@ -21,33 +21,16 @@ public class TestCountDownLatch {
     );
 
     public static void main(String[] args) throws InterruptedException, ExecutionException {
-
         for (int i = 0; i < 10; i++) {
             CountDownLatch countDownLatch = new CountDownLatch(10);
-
             for (int j = 0; j < 10; j++) {
-//                int finalJ = j;
-//                new Thread(()-> {
-//                    System.out.println(finalJ);
-//                    countDownLatch.countDown();
-//                }).start();
-                int finalJ = j;
-//                executor.execute(()->{
-//                    System.out.println(finalJ);
-//                    countDownLatch.countDown();
-//                });
                 Workers workers = new Workers("name " + j, countDownLatch);
-
                 Future<String> future = executor.submit(workers);
-
                 System.out.println(future.get());
-
             }
-
             countDownLatch.await();
             System.out.println("--------------");
         }
-
         while (!executor.isTerminated())
             executor.shutdown();
     }

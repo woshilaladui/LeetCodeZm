@@ -11,8 +11,8 @@ import java.io.*;
 public class A4 {
     public static void main(String[] args) {
 
-        String filePath = "C:\\Users\\Administrator\\Desktop\\郑萌\\1105实验室\\学习\\java\\xmind//test.txt";
-        String filePath2 = "C:\\Users\\Administrator\\Desktop\\郑萌\\1105实验室\\学习\\java\\xmind//test3.txt";
+        String filePath = "E:\\code\\shuini_knowledege//merge_sgns_bigram_char300.txt";
+        String filePath2 = "E:\\code\\shuini_knowledege//merge_sgns_bigram_char300_new.txt";
 
         File file = new File(filePath);
         File file2 = new File(filePath2);
@@ -25,6 +25,7 @@ public class A4 {
 
         Writer writer = null;
         BufferedWriter bufferedWriter = null;
+        int i = 0;
         try {
             reader = new FileReader(oldFile);
             bufferedReader = new BufferedReader(reader);
@@ -33,8 +34,13 @@ public class A4 {
             bufferedWriter = new BufferedWriter(writer);
 
             String result = null; //每次读取一行的内容
+
             while ((result = bufferedReader.readLine()) != null) {
-                bufferedWriter.write(result);  //把内容写入文件
+                if(i++ == 0){
+                    continue;
+                }
+
+                bufferedWriter.write(result+"\n");  //把内容写入文件
                 //换行，result 是一行数据，所以每写一行就要换行
                 //bufferedWriter.newLine();
             }
@@ -58,6 +64,8 @@ public class A4 {
                 e.printStackTrace();
             }
         }
+        //1348469
+        System.out.println(i);
     }
 
 
