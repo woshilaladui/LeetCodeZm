@@ -1,0 +1,487 @@
+/*
+ * Copyright (c) Huawei Technologies Co., Ltd. 2022-2022. All rights reserved.
+ */
+
+package com.huawei.img;
+
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
+public class ImagePackage {
+    public static void main(String[] args) throws IOException {
+        File file = new File("D:\\code\\imgSave.jpg");
+        double[][][] imageRGB = getImageRGB(file);
+
+//        double[][][] resultRGB = bicubic_interpolation(imageRGB, 0.25, true);
+
+        System.out.println();
+
+    }
+
+    private static double[][][] bicubic_interpolation(double[][][] img, double scale, boolean antialiasing) {
+        int in_H = img.length;
+        int in_W = img[0].length;
+        int in_C = 3;
+
+        int out_H = (int) Math.ceil(in_H * scale);
+        int out_W = (int) Math.ceil(in_W * scale);
+        int kernel_width = 4;
+        String kernel = "cubic";
+
+        // get weights and indices
+        Map<String, Object> map = calculate_weights_indices(in_H, out_H, scale, kernel, kernel_width, antialiasing);
+        double[][] weights_H = (double[][]) map.get("weights");
+        double[][] indices_H = (double[][]) map.get("indices");
+        int sym_len_Hs = (int) map.get("sym_len_s");
+        int sym_len_He = (int) map.get("sys_len_e");
+
+        map = calculate_weights_indices(in_W, out_W, scale, kernel, kernel_width, antialiasing);
+        double[][] weights_W = (double[][]) map.get("weights");
+        double[][] indices_W = (double[][]) map.get("indices");
+        int sym_len_Ws = (int) map.get("sym_len_s");
+        int sym_len_We = (int) map.get("sys_len_e");
+        /**
+         * process H dimension
+         * symmetric copying
+         */
+        double[][][] img_aug = new double[in_H + sym_len_Hs + sym_len_He][in_W][in_C];
+        System.arraycopy(img, 0, img_aug, sym_len_Hs, in_H);
+
+        double[][][] sym_patch = new double[sym_len_Hs][in_W][in_C];
+        System.arraycopy(img, 0, sym_patch, 0, sym_len_Hs);//  sym_patch = img[:sym_len_Hs, :, :]
+        double[][][] sym_patch_inv = reverseArray(sym_patch);// sym_patch_inv = sym_patch[::-1]
+        System.arraycopy(sym_patch_inv, 0, img_aug, 0, sym_len_Hs); // img_aug[0:sym_len_Hs] = sym_patch_inv
+
+        System.arraycopy(reverseArray(img), 0, sym_patch, 0, sym_len_He);// 111 sym_patch = img[-sym_len_He:, :, :]
+        sym_patch_inv = reverseArray(sym_patch);// sym_patch_inv = sym_patch[::-1]
+        System.arraycopy(sym_patch_inv, 0, img_aug, sym_len_Hs + in_H, sym_len_Hs + in_H + sym_len_He - sym_len_Hs);// img_aug[sym_len_Hs + in_H:sym_len_Hs + in_H + sym_len_He] = sym_patch_inv
+
+        double[][][] out_1 = new double[out_H][in_W][in_C];
+        kernel_width = weights_H[0].length; // kernel_width = weights_H.shape[1]
+
+        for (int i = 0; i < out_H; i++) {
+            int idx = (int) indices_H[i][0];
+            // 按照列去赋值
+            resolveOut1(out_1, dotOut1(weights_H[i], getImgAugCol(img_aug, idx, kernel_width, 0)), i, 0);
+            resolveOut1(out_1, dotOut1(weights_H[i], getImgAugCol(img_aug, idx, kernel_width, 1)), i, 1);
+            resolveOut1(out_1, dotOut1(weights_H[i], getImgAugCol(img_aug, idx, kernel_width, 2)), i, 2);
+        }
+
+        /**
+         * process W dimension
+         * symmetric copying
+         */
+        double[][][] out_1_aug = new double[out_H][in_W + sym_len_Ws + sym_len_We][in_C];
+        // out_1_aug[:, sym_len_Ws:sym_len_Ws + in_W] = out_1
+        resolveOut_1_aug(out_1, out_1_aug, sym_len_Ws, sym_len_Ws + in_W);
+
+        // sym_patch = out_1[:, :sym_len_Ws, :]
+        sym_patch = resolveSym_patch(out_1, sym_len_Ws);
+
+        // sym_patch_inv = sym_patch[:, ::-1]
+        sym_patch_inv = reverseArray2(sym_patch);
+
+        // out_1_aug[:, 0:sym_len_Ws] = sym_patch_inv
+        resolveOut_1_aug(sym_patch_inv, out_1_aug, 0, sym_len_Ws);
+
+        // sym_patch = out_1[:, -sym_len_We:, :]
+        resolveOut_1(out_1_aug, sym_len_We);
+        // sym_patch_inv = sym_patch[:, ::-1]
+        sym_patch_inv = reverseArray2(sym_patch);
+        //  out_1_aug[:, sym_len_Ws + in_W:sym_len_Ws + in_W + sym_len_We] = \
+        //        sym_patch_inv
+        resolveOut_1_aug(sym_patch_inv, out_1_aug, sym_len_Ws + in_W, sym_len_Ws + in_W + sym_len_We);
+
+        double[][][] out_2 = new double[out_H][out_W][in_C];
+
+        kernel_width = weights_W[0].length;
+        for (int i = 0; i < out_H; i++) {
+            int idx = (int) indices_W[i][0];
+            resolveOut2(out_2, dotOut2(getOut_1_aug(out_1_aug, idx, kernel_width, 0), weights_W[i]), i, 0);
+            resolveOut2(out_2, dotOut2(getOut_1_aug(out_1_aug, idx, kernel_width, 1), weights_W[i]), i, 1);
+            resolveOut2(out_2, dotOut2(getOut_1_aug(out_1_aug, idx, kernel_width, 2), weights_W[i]), i, 2);
+        }
+        clipOut(out_2,0,255);
+        return out_2;
+    }
+
+    private static void clipOut(double[][][] out, double min,double max){
+        for(int i =0;i<out.length;i++){
+            for(int j =0;j< out[0].length;j++){
+                for(int k =0;k<out[0][0].length;k++){
+                    if(out[i][j][k] < min){
+                        out[i][j][k] = min;
+                        continue;
+                    }
+                    if(out[i][j][k] > max){
+                        out[i][j][k] = max;
+                        continue;
+                    }
+                }
+            }
+        }
+    }
+
+    private static double[][][] resolveOut_1(double[][][] out_1, int sym_len_We) {
+        double[][][] newArr = new double[out_1.length][sym_len_We][3];
+        // -sym_len_We
+        for (int i = 0; i < out_1.length; i++) {
+            for (int j = out_1[0].length - 1; j > out_1[0].length - 1 - sym_len_We; j--) {
+                System.arraycopy(out_1[i][j], 0, newArr[i][j], 0, 3);
+            }
+        }
+        return newArr;
+    }
+
+    private static void resolveOut_1_aug(double[][][] src, double[][][] dest, int from, int to) {
+        for (int i = 0; i < dest.length; i++) {
+            for (int j = 0; j < to - from; j++) {
+                System.arraycopy(src[i][j], 0, dest[i][j], 0, 3);
+            }
+        }
+    }
+
+    // 第二维度上reverse
+    private static double[][][] reverseArray2(double[][][] array) {
+        double[][][] newArr = new double[array.length][][];
+        for (int i = 0; i < array.length; i++) {
+            for (int j = 0; j < array[0].length; j++) {
+                newArr[i][j] = array[i][array[0].length - j - 1];
+            }
+        }
+        return newArr;
+    }
+
+    private static double[][][] resolveSym_patch(double[][][] out_1, int sym_len_Ws) {
+        double[][][] newArr = new double[out_1.length][sym_len_Ws][3];
+        for (int i = 0; i < out_1.length; i++) {
+            for (int j = 0; j < sym_len_Ws; j++) {
+                System.arraycopy(out_1[i][j], 0, newArr[i][j], 0, 3);
+            }
+        }
+        return newArr;
+    }
+
+    private static void resolveOut_1_aug1(double[][][] out_1_aug, double[][][] out_1, int sym_len_Ws, int in_W) {
+        for (int i = 0; i < out_1_aug.length; i++) {
+            System.arraycopy(out_1[i], 0, out_1_aug[i], sym_len_Ws, in_W);
+        }
+    }
+
+    private static double[][] getOut_1_aug(double[][][] out_1_aug, int idx, int kernel_width, int index) {
+        double[][] newArr = new double[out_1_aug.length][kernel_width];
+
+        for (int i = 0; i < out_1_aug.length; i++) {
+            for (int j = 0; j < kernel_width; j++) {
+                newArr[i][j] = out_1_aug[i][j + idx][index];
+            }
+        }
+        return newArr;
+    }
+
+    private static double[][] getImgAugCol(double[][][] img_aug, int idx, int kernel_width, int index) {
+        double[][] newArr = new double[kernel_width][img_aug[0].length];
+
+        for (int i = 0; i < kernel_width; i++) {
+            for (int j = 0; j < img_aug[0].length; j++) {
+                newArr[i][j] = img_aug[idx + i][j][index];
+            }
+        }
+        return newArr;
+    }
+
+    private static double[] dotOut2(double[][] arr1, double[] arr2) {
+        double[] newArr = new double[arr1.length];
+
+        for (int j = 0; j < arr2.length; j++) {
+            for (int i = 0; i < arr1[0].length; i++) {
+                newArr[i] += arr2[i] * arr1[j][i];
+            }
+        }
+        return newArr;
+    }
+
+    private static double[] dotOut1(double[] arr1, double[][] arr2) {
+        double[] newArr = new double[arr1.length];
+
+        for (int j = 0; j < arr2.length; j++) {
+            for (int i = 0; i < arr1.length; i++) {
+                newArr[j] += arr1[i] * arr2[j][i];
+            }
+        }
+        return newArr;
+    }
+
+    private static void resolveOut2(double[][][] out_2, double[] dotArr, int index1, int index2) {
+        for (int i = 0; i < out_2.length; i++) {
+            out_2[i][index1][index2] = dotArr[i];
+        }
+    }
+
+    private static void resolveOut1(double[][][] out_1, double[] dotArr, int index1, int index2) {
+        for (int i = 0; i < out_1[index1].length; i++) {
+            out_1[index1][i][index2] = dotArr[i];
+        }
+    }
+
+    private static double[][][] reverseArray(double[][][] array) {
+        double[][][] newArr = new double[array.length][][];
+        for (int i = 0; i < array.length; i++) {
+            newArr[array.length - i - 1] = array[i];
+        }
+        return newArr;
+    }
+
+    private static double[][] _cubic(double[][] x) {
+        double[][] absX = absMatrix(x);
+        double[][] absX2 = powerMatrix(x, 2);
+        double[][] absX3 = powerMatrix(x, 3);
+        double[][] weights = new double[x.length][];
+        for (int i = 0; i < x.length; i++) {
+            for (int j = 0; j < x[0].length; j++) {
+                weights[i][j] = (1.5 * absX3[i][j] - 2.5 * absX2[i][j] + 1) *
+                        (absX[i][j] <= 1 ? 1 : 0) + (-0.5 * absX3[i][j] + 2.5 * absX2[i][j] - 4 * absX[i][j] + 2) *
+                        (absX[i][j] > 1 && absX[i][j] <= 2 ? 1 : 0);
+            }
+        }
+        return weights;
+    }
+
+    private static double[][] powerMatrix(double[][] x, double power) {
+        double[][] newArr = new double[x.length][];
+        for (int i = 0; i < x.length; i++) {
+            for (int j = 0; j < x[0].length; j++) {
+                newArr[i][j] = Math.pow(x[i][j], power);
+            }
+        }
+        return newArr;
+    }
+
+    private static double[][] absMatrix(double[][] x) {
+        double[][] newArr = new double[x.length][];
+        for (int i = 0; i < x.length; i++) {
+            for (int j = 0; j < x[0].length; j++) {
+                newArr[i][j] = Math.abs(x[i][j]);
+            }
+        }
+        return newArr;
+    }
+
+    private static Map<String, Object> calculate_weights_indices(
+            int in_length, int out_length, double scale, String kernel, int kernel_width, boolean antialiasing
+    ) {
+        double _kernel_width = kernel_width;
+        if (scale < 1 && antialiasing) {
+            _kernel_width = kernel_width / scale;
+        }
+
+        double[] x = new double[out_length];
+        for (int i = 1; i <= out_length; i++) {
+            x[i] = i;
+        }
+
+        double[] u = transformX2U(x, scale);
+
+        // What is the left-most pixel that can be involved in the computation?
+        double[] left = transformU2Left(u, _kernel_width);
+
+        int P = (int) (Math.ceil(_kernel_width) + 2);
+
+        // The indices of the input pixels involved in computing the k-th output
+        // pixel are in row k of the indices matrix.
+        double[][] indices = getIndices(left, out_length, P);
+
+        // The weights used to compute the k-th output pixel are in row k of the weights matrix.
+        double[][] distance_to_center = getDistance2Center(u, indices, out_length, P);
+
+        //apply cubic kernel
+        double[][] weights;
+        if (scale < 1 && antialiasing) {//distance_to_center, scale
+            weights = matrixMultiply(_cubic(matrixMultiply(distance_to_center, scale)), scale);
+        } else {
+            weights = _cubic(distance_to_center);
+        }
+        // Normalize the weights matrix so that each row sums to 1.
+        weights = transformWeights(weights, out_length, P);
+
+        /**
+         * If a column in weights is all zero, get rid of it. only consider the
+         * first and last column.
+         */
+        double[] weights_zero_tmp = new double[weights[0].length];
+        for (int j = 0; j < weights[0].length; j++) {
+            for (int i = 0; i < weights.length; i++) {
+                weights_zero_tmp[j] += weights[i][j] == 0 ? 1 : 0;
+            }
+        }
+        if (!isClose(weights_zero_tmp[0], 0)) {
+            indices = arrayCopyColumns(indices, 1, 1 + P - 2);
+            weights = arrayCopyColumns(weights, 1, 1 + P - 2);
+        }
+
+        if (!isClose(weights_zero_tmp[weights_zero_tmp.length - 1], 0)) {
+            indices = arrayCopyColumns(indices, 0, P - 2);
+            weights = arrayCopyColumns(weights, 0, P - 2);
+        }
+        int sym_len_s = (int) (-1 * getArrayMin(indices) + 1);
+        int sys_len_e = (int) (getArrayMax(indices) - in_length);
+        Map<String, Object> map = new HashMap<>();
+        map.put("weights", weights);
+        map.put("indices", indices);
+        map.put("sym_len_s", sym_len_s);
+        map.put("sys_len_e", sys_len_e);
+        return map;
+    }
+
+    private static double[][] arrayCopyColumns(double[][] array, int from, int to) {
+        double[][] newArr = new double[array.length][to - from];
+        for (int i = 0; i < array.length; i++) {
+            newArr[i] = Arrays.copyOfRange(array[i], from, to);
+        }
+        return newArr;
+    }
+
+    private static double getArrayMax(double[][] array) {
+        double max = Double.MIN_VALUE;
+        for (double[] arr : array) {
+            for (double d : arr) {
+                if (d > max) {
+                    max = d;
+                }
+            }
+        }
+        return max;
+    }
+
+    private static double getArrayMin(double[][] array) {
+        double min = Double.MAX_VALUE;
+        for (double[] arr : array) {
+            for (double d : arr) {
+                if (d < min) {
+                    min = d;
+                }
+            }
+        }
+        return min;
+    }
+
+    private static boolean isClose(double a, double b) {
+        return (a - b) < 1e-6;
+    }
+
+    private static double[][] transformWeights(double[][] weights, int out_length, int P) {
+        double[][] newArr = new double[out_length][P];
+        double[] weights_sum = new double[out_length];
+        for (int i = 0; i < weights.length; i++) {
+            weights_sum[i] = Arrays.stream(weights[i]).sum();
+        }
+        // reshape
+        for (int i = 0; i < out_length; i++) {
+            Arrays.fill(newArr[i], weights_sum[i]);
+        }
+        // computer
+        for (int i = 0; i < out_length; i++) {
+            for (int j = 0; j < P; j++) {
+                newArr[i][j] = weights[i][j] / newArr[i][j];
+            }
+        }
+        return newArr;
+    }
+
+    private static double[][] matrixMultiply(double[][] x, double param) {
+        double[][] newArr = new double[x.length][];
+        for (int i = 0; i < x.length; i++) {
+            for (int j = 0; j < x[0].length; j++) {
+                newArr[i][j] = x[i][j] * param;
+            }
+        }
+        return newArr;
+    }
+
+    private static double[][] matrixMultiply(double[][] x, double[][] y) {
+        double[][] newArr = new double[x.length][];
+        for (int i = 0; i < x.length; i++) {
+            for (int j = 0; j < x[0].length; j++) {
+                newArr[i][j] = x[i][j] * y[i][j];
+            }
+        }
+        return newArr;
+    }
+
+    private static double[][] getDistance2Center(double[] u, double[][] indices, int out_length, int P) {
+        double[][] distance_to_center = new double[out_length][P];
+        for (int i = 0; i < out_length; i++) {
+            for (int j = 0; j < P; j++) {
+                distance_to_center[i][j] = u[i] - indices[i][j];
+            }
+        }
+        return distance_to_center;
+    }
+
+    private static double[][] getIndices(double[] left, int out_length, int P) {
+//        double [][]reshapeLeft = new double[out_length][P];
+//        for (int i = 0; i < out_length; i++) {
+//            for (int j = 0; j < P; j++) {
+//                reshapeLeft[i][j] = left[i];
+//            }
+//        }
+//        double [][]newArr = new double[out_length][P];
+//        for (int i = 0; i < out_length; i++) {
+//            for (int j = 0; j < P; j++) {
+//                newArr[i][j] = j;
+//            }
+//        }
+        double[][] indices = new double[out_length][P];
+        for (int i = 0; i < out_length; i++) {
+            for (int j = 0; j < P; j++) {
+                indices[i][j] = left[i] + j;
+//                indices[i][j] = reshapeLeft[i][j] + newArr[i][j];
+            }
+        }
+        return indices;
+    }
+
+    private static double[] transformU2Left(double[] u, double kernel_width) {
+        double[] newArr = new double[u.length];
+        for (int i = 0; i < u.length; i++) {
+            newArr[i] = u[i] - kernel_width / 2;
+        }
+        return newArr;
+    }
+
+    private static double[] transformX2U(double[] x, double scale) {
+        double[] newArr = new double[x.length];
+        for (int i = 0; i < x.length; i++) {
+            newArr[i] = x[i] / scale + 0.5 * (1 - 1 / scale);
+        }
+        return newArr;
+    }
+
+    private static double[][][] getImageRGB(File file) throws IOException {
+        BufferedImage img = ImageIO.read(file);
+
+        int height = img.getHeight();
+        int width = img.getWidth();
+        double[][][] matrix = new double[height][width][3];
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                Color color = new Color(img.getRGB(x, y));
+                matrix[y][x][0] = color.getBlue();
+                matrix[y][x][1] = color.getGreen();
+                matrix[y][x][2] = color.getRed();
+            }
+        }
+
+        BufferedImage img2 = new BufferedImage(width,height,1);
+//        img2.setRGB();
+
+        return matrix;
+    }
+
+}
