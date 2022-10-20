@@ -478,8 +478,31 @@ public class ImagePackage {
             }
         }
 
-        BufferedImage img2 = new BufferedImage(width,height,1);
+        BufferedImage img2 = new BufferedImage(width, height, 1);
+
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                Color color = new Color(
+                        (int) matrix[y][x][2],
+                        (int) matrix[y][x][1],
+                        (int) matrix[y][x][0]
+                );
+                img2.setRGB(x,y,color.getRGB());
+            }
+        }
+
+        File fileOut = new File("D:\\tt.jpg");
+        ImageIO.write(img2, "jpg", fileOut);
+
 //        img2.setRGB();
+//        BufferedImage bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+//        Graphics2D graphics2d = (Graphics2D) bufferedImage.getGraphics();
+//
+//        graphics2d.setBackground(Color.WHITE);
+//        graphics2d.clearRect(0, 0, width, height);
+//        graphics2d.setPaint(new Color(1, 2, 3));
+//        graphics2d.fillRect(0, 0, 100, 100);
+
 
         return matrix;
     }
