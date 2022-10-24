@@ -9,3 +9,19 @@
             out1[index1][i][index2] = dotArr[i];
         }
     }
+    protected static void resolveOut2(double[][][] out2, double[] dotArr, int index1, int index2) {
+        for (int i = 0; i < out2.length; i++) {
+            out2[i][index1][index2] = dotArr[i];
+            System.arraycopy(dotArr, i, out2[i][index1], index2, 1);
+        }
+    }
+
+    public static void main(String[] args) {
+        double[][][] a = new double[][][]{
+                {{1, 2, 3}, {3, 4, 5}},
+                {{6, 7, 8}, {9, 10, 11}},
+        };
+        double[] b = new double[]{88, 99};
+        resolveOut2(a,b,0,1);
+        System.out.println();
+    }
