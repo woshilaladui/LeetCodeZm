@@ -1,0 +1,11 @@
+    protected static void resolveOut2(double[][][] out2, double[] dotArr, int index1, int index2) {
+        for (int i = 0; i < out2.length; i++) {
+            out2[i][index1][index2] = dotArr[i];
+        }
+    }
+
+    protected static void resolveOut1(double[][][] out1, double[] dotArr, int index1, int index2) {
+        for (int i = 0; i < out1[index1].length; i++) {
+            out1[index1][i][index2] = dotArr[i];
+        }
+    }
